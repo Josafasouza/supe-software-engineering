@@ -46,6 +46,7 @@ html {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -53,6 +54,8 @@ body {
     line-height: 1.6;
     letter-spacing: -0.01em;
     min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* --- Background Cibernético e Efeitos Glow --- */
@@ -1787,6 +1790,14 @@ body {
     }
     .mobile-menu-toggle {
         display: flex;
+    }
+    .btn-cta-nav {
+        display: none !important; /* Oculta CTA no header mobile para liberar espaço */
+    }
+    .hero-title {
+        font-size: clamp(1.8rem, 7vw, 2.5rem) !important; /* Reduz tamanho do título no mobile */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     .nav-menu {
         position: fixed;
