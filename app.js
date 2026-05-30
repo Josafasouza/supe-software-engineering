@@ -8,7 +8,8 @@ const i18nConfig = {
     languages: [
         { code: 'pt', name: 'Português', iso: 'PT' },
         { code: 'en', name: 'English', iso: 'EN' },
-        { code: 'ru', name: 'Русский', iso: 'RU' }
+        { code: 'ru', name: 'Русский', iso: 'RU' },
+        { code: 'es', name: 'Español', iso: 'ES' }
     ]
 };
 
@@ -136,7 +137,27 @@ const translations = {
         
         // Subpáginas (Geral)
         ".back-home-link": "<i data-lucide=\"arrow-left\"></i> Voltar para Home",
-        ".whatsapp-tooltip": "Fale com o CEO Josafá"
+        ".whatsapp-tooltip": "Fale com o CEO Josafá",
+
+        // Metadados de Títulos de Abas e Cabeçalhos específicos
+        "title": "Diretrizes de Privacidade | Supé Software Engineering",
+        "title-terms": "Termos de Uso | Supé Software Engineering",
+        "title-sla": "SLA de Engenharia | Supé Software Engineering",
+        "title-status": "Status do Núcleo | Supé Software Engineering",
+        ".privacy-title": "Política de Privacidade",
+        ".privacy-code": "Código do Núcleo: SP-PRIV-2026",
+        ".privacy-compiled": "Última Compilação: 30 de Maio de 2026",
+        ".terms-title": "Termos de Uso",
+        ".terms-code": "Código do Núcleo: SP-TERMS-2026",
+        ".terms-compiled": "Última Compilação: 30 de Maio de 2026",
+        ".sla-title": "Acordo de SLA de Engenharia",
+        ".sla-code": "Código do Núcleo: SP-SLA-ENG-3.0",
+        ".sla-compiled": "Última Compilação: 30 de Maio de 2026",
+        ".status-title": "Status do Núcleo",
+        ".status-desc": "Mapeamento de telemetria em tempo real dos microsserviços Supé.",
+        ".status-badge-text": "TODOS OS SISTEMAS ONLINE",
+        ".subsystem-status-text": "OPERACIONAL",
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Latência Geral da Rede (ms)"
     },
     en: {
         // Navigation (Header & Footer)
@@ -260,7 +281,27 @@ const translations = {
         
         // Subpages
         ".back-home-link": "<i data-lucide=\"arrow-left\"></i> Back to Home",
-        ".whatsapp-tooltip": "Talk with CEO Josafá"
+        ".whatsapp-tooltip": "Talk with CEO Josafá",
+
+        // Tab titles and header elements
+        "title": "Privacy Guidelines | Supé Software Engineering",
+        "title-terms": "Terms of Use | Supé Software Engineering",
+        "title-sla": "Engineering SLA | Supé Software Engineering",
+        "title-status": "Core Status | Supé Software Engineering",
+        ".privacy-title": "Privacy Policy",
+        ".privacy-code": "Core Code: SP-PRIV-2026",
+        ".privacy-compiled": "Last Compiled: May 30, 2026",
+        ".terms-title": "Terms of Use",
+        ".terms-code": "Core Code: SP-TERMS-2026",
+        ".terms-compiled": "Last Compiled: May 30, 2026",
+        ".sla-title": "Engineering SLA Agreement",
+        ".sla-code": "Core Code: SP-SLA-ENG-3.0",
+        ".sla-compiled": "Last Compiled: May 30, 2026",
+        ".status-title": "Core Status",
+        ".status-desc": "Real-time telemetry mapping of Supé microservices.",
+        ".status-badge-text": "ALL SYSTEMS OPERATIONAL",
+        ".subsystem-status-text": "OPERATIONAL",
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> General Network Latency (ms)"
     },
     ru: {
         // Navigation (Header & Footer)
@@ -384,7 +425,171 @@ const translations = {
         
         // Subpages
         ".back-home-link": "<i data-lucide=\"arrow-left\"></i> Вернуться на Главную",
-        ".whatsapp-tooltip": "Связаться с генеральным директором"
+        ".whatsapp-tooltip": "Связаться с генеральным директором",
+
+        // Tab titles and header elements
+        "title": "Правила Конфиденциальности | Supé Software Engineering",
+        "title-terms": "Условия Использования | Supé Software Engineering",
+        "title-sla": "Инженерное SLA | Supé Software Engineering",
+        "title-status": "Статус Ядра | Supé Software Engineering",
+        ".privacy-title": "Политика конфиденциальности",
+        ".privacy-code": "Код Ядра: SP-PRIV-2026",
+        ".privacy-compiled": "Последняя компиляция: 30 мая 2026",
+        ".terms-title": "Условия использования",
+        ".terms-code": "Код Ядра: SP-TERMS-2026",
+        ".terms-compiled": "Последняя компиляция: 30 мая 2026",
+        ".sla-title": "Соглашение об инженерном SLA",
+        ".sla-code": "Код Ядра: SP-SLA-ENG-3.0",
+        ".sla-compiled": "Последняя компиляция: 30 мая 2026",
+        ".status-title": "Статус Ядра",
+        ".status-desc": "Картирование телеметрии микрослужб Supé в реальном времени.",
+        ".status-badge-text": "ВСЕ СИСТЕМЫ РАБОТАЮТ",
+        ".subsystem-status-text": "РАБОТАЕТ",
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Общая задержка сети (мс)"
+    },
+    es: {
+        // Navigation (Header & Footer)
+        "#nav-item-hero, .footer-column:nth-child(1) ul li:nth-child(1) a": "Inicio",
+        "#nav-item-dna, .footer-column:nth-child(1) ul li:nth-child(2) a": "DNA Supé",
+        "#nav-item-servicos, .footer-column:nth-child(1) ul li:nth-child(3) a": "Soluciones",
+        "#nav-item-processo, .footer-column:nth-child(1) ul li:nth-child(4) a": "Integración",
+        "#nav-item-portfolio, .footer-column:nth-child(1) ul li:nth-child(5) a": "Casos de Uso",
+        "#nav-item-terminal": "Consola",
+        "#btn-header-cta span, .btn-cta-nav span": "Contáctenos",
+        
+        // Hero
+        ".hero-badge span:nth-child(2)": "Líderes en Ingeniería de Software Suprema",
+        ".hero-title": "Construyendo el Mañana con <span class=\"gradient-text\">Ingeniería Suprema</span>",
+        ".hero-description": "Integramos inteligencia artificial, arquitectura robusta y diseño de vanguardia. Moldeamos código elegante para convertir desafíos de negocios complejos en software innovador de escala global.",
+        "#hero-cta-primary span": "Iniciar un Proyecto",
+        "#hero-cta-secondary span": "Explorar Soluciones",
+        ".scroll-text": "Deslice para integrar",
+        
+        // DNA
+        ".dna-section .section-tag span": "Nuestro DNA",
+        ".dna-section h2.section-title": "Ingeniería y Liderazgo de <span class=\"gradient-text-alt\">Élite</span>",
+        ".dna-section p.section-desc": "En Supé, entendemos que el software de alto nivel no se limita a líneas de código. Es la unión simbiótica entre matemáticas, diseño e inteligencia de negocios. Desarrollamos ecosistemas integrados enfocados en el futuro digital de las corporaciones más exigentes.",
+        ".ceo-quote": "\"La verdadera tecnología es invisible y perfectamente integrada. Nuestro compromiso en Supé es diseñar sistemas que parezcan simples para el usuario final, pero que operen con extrema robustez e inteligencia en el núcleo de cada negocio.\"",
+        ".ceo-name": "Josafá de Pinho Souza",
+        ".ceo-title": "Fundador & CEO",
+        ".stat-experience .stat-label": "Años de Innovación",
+        ".stat-satisfaction span": "Calidad Suprema",
+        
+        // Soluções
+        ".servicos-section .section-tag span": "Nuestra Experiencia",
+        ".servicos-section h2.section-title": "Soluciones de <span class=\"gradient-text\">Nueva Generación</span>",
+        ".servicos-section p.section-desc": "Desde el diseño hasta la infraestructura, cubrimos todo el espectro del ciclo de ingeniería de software con tecnologías modernas y metodologías ágiles de vanguardia.",
+        "#card-service-1 h3": "Sistemas Personalizados",
+        "#card-service-1 p": "Plataformas corporativas a medida, APIs escalables e integraciones complejas construidas con las tecnologías más eficientes del mercado.",
+        "#card-service-1 .card-features li:nth-child(1)": "<i data-lucide=\"check-circle-2\"></i> React / Next.js / NestJS",
+        "#card-service-1 .card-features li:nth-child(2)": "<i data-lucide=\"check-circle-2\"></i> Arquitectura de Microservicios",
+        "#card-service-1 .card-features li:nth-child(3)": "<i data-lucide=\"check-circle-2\"></i> Rendimiento Ultra Optimizado",
+        
+        "#card-service-2 h3": "Inteligencia Artificial",
+        "#card-service-2 p": "Integramos Modelos de Lenguaje (LLMs), Visión Artificial e IA Generativa directamente en los flujos de trabajo y productos de nuestros socios.",
+        "#card-service-2 .card-features li:nth-child(1)": "<i data-lucide=\"check-circle-2\"></i> Agentes Autónomos de IA",
+        "#card-service-2 .card-features li:nth-child(2)": "<i data-lucide=\"check-circle-2\"></i> RAG (Retrieval-Augmented Generation)",
+        "#card-service-2 .card-features li:nth-child(3)": "<i data-lucide=\"check-circle-2\"></i> Modelos Predictivos Dedicados",
+        
+        "#card-service-3 h3": "Arquitectura Cloud & DevOps",
+        "#card-service-3 p": "Infraestructuras resilientes en la nube, pipelines automatizados de CI/CD y prácticas de seguridad corporativa robustas basadas en el cumplimiento (IaC).",
+        "#card-service-3 .card-features li:nth-child(1)": "<i data-lucide=\"check-circle-2\"></i> AWS / GCP / Azure",
+        "#card-service-3 .card-features li:nth-child(2)": "<i data-lucide=\"check-circle-2\"></i> Kubernetes & Docker",
+        "#card-service-3 .card-features li:nth-child(3)": "<i data-lucide=\"check-circle-2\"></i> Seguridad Zero-Trust",
+        
+        "#card-service-4 h3": "Design de Experiência",
+        "#card-service-4 p": "Interfaces disruptivas, prototipos de alta fidelidad e investigación con usuarios para garantizar tasas extraordinarias de adopción y compromiso digital.",
+        "#card-service-4 .card-features li:nth-child(1)": "<i data-lucide=\"check-circle-2\"></i> Investigación de UX Basada en Datos",
+        "#card-service-4 .card-features li:nth-child(2)": "<i data-lucide=\"check-circle-2\"></i> Sistema de Diseño Escalable",
+        "#card-service-4 .card-features li:nth-child(3)": "<i data-lucide=\"check-circle-2\"></i> Animaciones de Altísima Fluidez",
+        
+        // Processo
+        ".processo-section .section-tag span": "El Motor de Integración",
+        ".processo-section h2.section-title": "Nuestra Ingeniería <span class=\"gradient-text-alt\">en la Práctica</span>",
+        ".processo-section p.section-desc": "Vea cómo integramos estrategia, desarrollo, inteligencia artificial y computación en la nube para crear ecosistemas digitales indestructibles.",
+        
+        // Portfólio
+        ".portfolio-section .section-tag span": "Vitrina Tecnológica",
+        ".portfolio-section h2.section-title": "Nuestras <span class=\"gradient-text\">Obras de Ingeniería</span>",
+        ".portfolio-section p.section-desc": "Aplicaciones de muy alto rendimiento, sistemas inteligentes de toma de decisiones y plataformas web construidas de extremo a extremo por nuestro equipo.",
+        "#project-case-1 h3": "AetherFlow AI Enterprise",
+        "#project-case-1 p": "Orquestador inteligente de flujos organizacionales integrado con IA Generativa privada y RAG para el sector financiero.",
+        "#project-case-1 .stat-highlight": "99.9% Disponibilidad",
+        "#project-case-1 .project-link span": "Ver Detalles",
+        "#project-case-2 h3": "Helios Analytics Suite",
+        "#project-case-2 p": "Panel de procesamiento de Big Data con actualizaciones en tiempo real para el control logístico de grandes flotas transcontinentales.",
+        "#project-case-2 .stat-highlight": "10M+ Eventos/seg",
+        "#project-case-2 .project-link span": "Ver Detalles",
+        
+        // Terminal
+        ".terminal-section .section-tag span": "Consola de Integración",
+        ".terminal-section h2.section-title": "Interactúe con <span class=\"gradient-text-alt\">Nuestro Núcleo</span>",
+        ".terminal-section p.section-desc": "Experimente nuestra simulación de consola de ingeniería en tiempo real. Escriba comandos o haga clic en los accesos directos para verificar la resiliencia y compilar nuevos módulos.",
+        ".shortcut-label": "Accesos rápidos:",
+        "#terminal-input": "Escriba 'help' y presione Enter...",
+        
+        // Contato
+        ".contato-section .section-tag span": "Hable con Ingenieros",
+        ".contato-section h2.section-title": "¿Listo para Iniciar su <span class=\"gradient-text\">Evolución Digital?</span>",
+        ".contato-section p.section-desc": "Nuestro equipo está listo para diseñar la mejor arquitectura técnica a medida para su desafío corporativo. Cuéntenos qué desea crear y nosotros entregamos la mejor ingeniería.",
+        ".contact-detail-item:nth-child(1) .detail-label": "Correo corporativo",
+        ".contact-detail-item:nth-child(2) .detail-label": "Sede central",
+        ".contact-detail-item:nth-child(3) .detail-label": "Privacidad & Cumplimiento",
+        ".contact-detail-item:nth-child(3) .detail-value": "LGPD e ISO 27001 en conformidad",
+        
+        ".project-planner-form h3": "Planifique su Software",
+        ".form-subtitle": "Seleccione sus preferencias y nos pondremos en contacto con una propuesta de arquitectura inicial.",
+        "label[for='form-name']": "Su Nombre *",
+        "label[for='form-email']": "Correo Corporativo *",
+        "#form-name": "Ej: Josafá de Pinho",
+        "#form-email": "Ej: josafa@supe.dev",
+        ".form-group:nth-child(3) > label": "¿Cuál es la necesidad principal? *",
+        ".radio-card:nth-child(1) span": "Software Personalizado",
+        ".radio-card:nth-child(2) span": "Integración de IA",
+        ".radio-card:nth-child(3) span": "Nube y Escala",
+        "label[for='form-message']": "Breve descripción del desafío *",
+        "#form-message": "Describa brevemente su idea o el problema de negocio que desea solucionar...",
+        "#btn-submit-form span": "Enviar Solicitud de Arquitectura",
+        
+        ".form-success-state h3": "¡Solicitud Compilada!",
+        ".form-success-state p": "Su solicitud de arquitectura ha sido enviada y procesada. Un arquitecto de software de Supé se pondrá en contacto en menos de 2 horas hábiles.",
+        "#btn-reset-form": "Enviar otro mensaje",
+        
+        // Footer (Extra)
+        ".brand-slogan": "Ingeniería de software de muy alto rendimiento. Diseñando el futuro a través de ecosistemas perfectamente integrados.",
+        ".footer-column:nth-child(1) h4": "Navegación",
+        ".footer-column:nth-child(2) h4": "Conectar",
+        ".footer-column:nth-child(3) h4": "Seguridad y Términos",
+        ".footer-column:nth-child(3) ul li:nth-child(1) a": "Privacidad",
+        ".footer-column:nth-child(3) ul li:nth-child(2) a": "Términos de Uso",
+        ".footer-column:nth-child(3) ul li:nth-child(3) a": "SLA de Engenharia",
+        ".footer-column:nth-child(3) ul li:nth-child(4) a": "Status del Núcleo",
+        ".footer-bottom p:nth-child(1)": "© 2026 Supé Software Engineering. Todos os direitos reservados. CEO Josafá de Pinho Souza.",
+        ".tech-signature": "Compilado con ⚡ Vanilla HTML/CSS/JS",
+        
+        // Subpages (Geral)
+        ".back-home-link": "<i data-lucide=\"arrow-left\"></i> Volver al Inicio",
+        ".whatsapp-tooltip": "Hablar con el CEO Josafá",
+
+        // Metadados de Títulos de Abas e Cabeçalhos específicos
+        "title": "Directrices de Privacidad | Supé Software Engineering",
+        "title-terms": "Términos de Uso | Supé Software Engineering",
+        "title-sla": "SLA de Ingeniería | Supé Software Engineering",
+        "title-status": "Estado del Núcleo | Supé Software Engineering",
+        ".privacy-title": "Política de Privacidad",
+        ".privacy-code": "Código del Núcleo: SP-PRIV-2026",
+        ".privacy-compiled": "Última Compilación: 30 de Mayo de 2026",
+        ".terms-title": "Términos de Uso",
+        ".terms-code": "Código del Núcleo: SP-TERMS-2026",
+        ".terms-compiled": "Última Compilación: 30 de Mayo de 2026",
+        ".sla-title": "Acuerdo de SLA de Ingeniería",
+        ".sla-code": "Código del Núcleo: SP-SLA-ENG-3.0",
+        ".sla-compiled": "Última Compilación: 30 de Mayo de 2026",
+        ".status-title": "Estado del Núcleo",
+        ".status-desc": "Mapeo de telemetría en tiempo real de los microservicios de Supé.",
+        ".status-badge-text": "TODOS LOS SISTEMAS ONLINE",
+        ".subsystem-status-text": "OPERATIVO",
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Latencia General de Red (ms)"
     }
 };
 
@@ -469,6 +674,33 @@ const stepsTranslations = {
             title: "Непрерывное Развертывание и Безопасное Облако",
             desc: "Автоматизация конвейеров CI/CD для безопасного развертывания, упаковка контейнеров в Kubernetes в облаке (AWS/GCP), защищенных архитектурой безопасности Zero-Trust.",
             metrics: ["Секунды", "DevOps и SRE инженеры"]
+        }
+    },
+    es: {
+        1: {
+            title: "Concepción Estructural & Discovery",
+            desc: "Inmersión completa en el ecosistema de negocios del cliente para mapear flujos, identificar cuellos de botella técnicos y diseñar la mejor fusión tecnológica personalizada. Aquí alineamos metas con Directores de UX y Arquitectos Jefes.",
+            metrics: ["2 semanas", "Analistas y UX Directors"]
+        },
+        2: {
+            title: "Arquitectura y Modelagem Resiliente",
+            desc: "Modelado de las bases técnicas del sistema utilizando microservicios, modelado de bases de datos distribuidas de alta resiliencia y diseño de flujos de eventos asíncronos listos para una escalabilidad astronómica.",
+            metrics: ["3 semanas", "Arquitectos de Sistemas y DBAs"]
+        },
+        3: {
+            title: "Codificación Limpa y Modular",
+            desc: "Nuestros ingenieros más experimentados entran en acción creando módulos con una cobertura rígida de pruebas automatizadas, obedeciendo las directrices más estrictas de Arquitectura Limpia, principios SOLID y rendimiento máximo.",
+            metrics: ["Variable", "Líderes de Desarrollo"]
+        },
+        4: {
+            title: "Fusión de Inteligencia Artificial",
+            desc: "Integración quirúrgica de inteligencia artificial de última generación. Acoplamos pipelines de aprendizaje automático, modelos predictivos o agentes conversacionales basados en LLMs directamente en el motor central del software.",
+            metrics: ["2 a 4 semanas", "Ingenieros de IA y Científicos"]
+        },
+        5: {
+            title: "Despliegue Continuo & Nube Zero-Trust",
+            desc: "Automatización de todo el flujo de implementación a través de pipelines CI/CD ultra seguros, empaquetando los artefactos en Kubernetes en la nube (AWS/GCP), protegidos por arquitectura de seguridad perimetral Zero-Trust.",
+            metrics: ["Segundos (Real-time)", "DevOps Engineers & SecOps"]
         }
     }
 };
@@ -591,6 +823,45 @@ Available commands in Supé Core:
         compileCEO: "Аутентификация учетных данных CEO Жозафа де Пиньо Соуза...",
         compileSuccess: "[СКОМПИЛИРОВАНО УСПЕШНО] Операционное ядро в сети и интегрировано!",
         errorCmd: "Нераспознанная команда: <span class=\"highlight-cmd\">{cmd}</span>. Введите <span class=\"highlight-cmd\">help</span> для справки."
+    },
+    es: {
+        help: `
+Comandos disponibles en el núcleo Supé:
+  <span class="highlight-cmd">about</span>     - Filosofía de liderazgo de la empresa y palabras del CEO Josafá.
+  <span class="highlight-cmd">stack</span>     - Muestra las tecnologías integradas de alto rendimiento.
+  <span class="highlight-cmd">compile</span>   - Simula la compilación de la infraestructura de arquitectura Supé.
+  <span class="highlight-cmd">clear</span>     - Limpia la pantalla de la consola.
+  <span class="highlight-cmd">help</span>      - Muestra este panel de ayuda para desarrolladores.
+`,
+        about: `
+[DNA SUPÉ SOFTWARE ENGINEERING]
+  Fundada y dirigida por el CEO <span class="cyan-text">Josafá de Pinho Souza</span>, Supé nació del
+  deseo supremo de elevar la ingeniería de software a un estándar global de élite.
+  
+  "Nuestra misión es la integridad: conectar arquitectura limpia, código resiliente
+  e inteligencia artificial pragmática para que las grandes corporaciones escalen de forma indestructible."
+  
+  [LIDERAZGO]
+  Josafá de Pinho Souza - CEO & Chief Systems Architect
+  Más de 15 años modelando ecosistemas empresariales de alta resiliencia.
+`,
+        stack: `
+[INTEGRATED TECHNOLOGY STACK]
+  * <span class="cyan-text">Frontend Premium:</span> Next.js, React, TailwindCSS, WebGL
+  * <span class="purple-text">Core Backend:</span> NestJS, Node.js, Go (Golang), Python, Rust
+  * <span class="green-text">Machine Learning:</span> OpenAI API, LangChain, PyTorch, RAG Pipelines
+  * <span class="gray-text">Cloud & DevOps:</span> AWS Cloud, Kubernetes, Terraform IaC, Docker
+  * <span class="cyan-text">Bases de Datos:</span> PostgreSQL (distribuida), Redis, MongoDB, Pinecone Vector DB
+`,
+        compileStart: "Conectando al clúster de Kubernetes Supé-PRO-01...",
+        compileAI: "Inicializando modelos de Inteligencia Artificial AetherFlow...",
+        compileAIOK: "[OK] OpenAI API v4.2.1 sincronizada con clave TLS 1.3.",
+        compileVDBOK: "[OK] Embeddings cargados en Pinecone Vector Database.",
+        compileBack: "Compilando paquetes backend de alto rendimiento (Go-Rest-Engine)...",
+        compileBackOK: "[OK] 1,024 microservicios respondiendo con un SLA de 99.99%.",
+        compileCEO: "Autenticando credenciales del CEO Josafá de Pinho Souza...",
+        compileSuccess: "[COMPILADO CON ÉXITO] ¡Núcleo operativo en línea e integrado!",
+        errorCmd: "Comando no reconocido: <span class=\"highlight-cmd\">{cmd}</span>. Escriba <span class=\"highlight-cmd\">help</span> para obtener asistencia."
     }
 };
 

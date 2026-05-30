@@ -246,12 +246,12 @@
             
             <div class="status-header-panel">
                 <div>
-                    <h1 class="gradient-text">Status do Núcleo</h1>
-                    <p style="color: var(--text-secondary);">Mapeamento de telemetria em tempo real dos microsserviços Supé.</p>
+                    <h1 class="gradient-text status-title">Status do Núcleo</h1>
+                    <p style="color: var(--text-secondary);" class="status-desc">Mapeamento de telemetria em tempo real dos microsserviços Supé.</p>
                 </div>
                 <div class="global-status-badge">
                     <span class="pulse-dot-green"></span>
-                    <span>TODOS OS SISTEMAS ONLINE</span>
+                    <span class="status-badge-text">TODOS OS SISTEMAS ONLINE</span>
                 </div>
             </div>
             
@@ -275,7 +275,7 @@
                         </div>
                         <div class="subsistema-status">
                             <span class="pulse-dot-green"></span>
-                            <span>OPERACIONAL</span>
+                            <span class="subsystem-status-text">OPERACIONAL</span>
                         </div>
                     </div>
 
@@ -294,7 +294,7 @@
                         </div>
                         <div class="subsistema-status">
                             <span class="pulse-dot-green"></span>
-                            <span>OPERACIONAL</span>
+                            <span class="subsystem-status-text">OPERACIONAL</span>
                         </div>
                     </div>
 
@@ -313,7 +313,7 @@
                         </div>
                         <div class="subsistema-status">
                             <span class="pulse-dot-green"></span>
-                            <span>OPERACIONAL</span>
+                            <span class="subsystem-status-text">OPERACIONAL</span>
                         </div>
                     </div>
 
@@ -332,14 +332,14 @@
                         </div>
                         <div class="subsistema-status">
                             <span class="pulse-dot-green"></span>
-                            <span>OPERACIONAL</span>
+                            <span class="subsystem-status-text">OPERACIONAL</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Painel de Telemetria Dinâmica -->
                 <div class="telemetria-panel glass-panel">
-                    <h2><i data-lucide="activity" style="color: var(--accent-cyan);"></i> Latência Geral da Rede (ms)</h2>
+                    <h2 class="status-chart-title"><i data-lucide="activity" style="color: var(--accent-cyan);"></i> Latência Geral da Rede (ms)</h2>
                     
                     <div class="canvas-container">
                         <canvas id="latency-chart"></canvas>
@@ -421,6 +421,8 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Script do Núcleo Principal contendo i18n e LanguageSelector -->
+    <script src="app.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             lucide.createIcons();
@@ -519,10 +521,25 @@
                 let vdbLat = (Math.random() * 2) + 7.2;
                 let cpuLd = Math.floor((Math.random() * 5) + 10);
                 
-                aiLatencyTxt.textContent = `Latência: ${aiLat.toFixed(1)}ms`;
-                apiLatencyTxt.textContent = `Latência: ${apiLat.toFixed(1)}ms`;
-                vdbLatencyTxt.textContent = `Latência: ${vdbLat.toFixed(1)}ms`;
-                cpuLoadTxt.textContent = `Carga da CPU: ${cpuLd}%`;
+                const currentLang = localStorage.getItem("supe-lang") || 'pt';
+                let latencyLabel = "Latência";
+                let cpuLabel = "Carga da CPU";
+                
+                if (currentLang === 'en') {
+                    latencyLabel = "Latency";
+                    cpuLabel = "CPU Load";
+                } else if (currentLang === 'ru') {
+                    latencyLabel = "Задержка";
+                    cpuLabel = "Нагрузка ЦП";
+                } else if (currentLang === 'es') {
+                    latencyLabel = "Latencia";
+                    cpuLabel = "Carga de CPU";
+                }
+                
+                aiLatencyTxt.textContent = `${latencyLabel}: ${aiLat.toFixed(1)}ms`;
+                apiLatencyTxt.textContent = `${latencyLabel}: ${apiLat.toFixed(1)}ms`;
+                vdbLatencyTxt.textContent = `${latencyLabel}: ${vdbLat.toFixed(1)}ms`;
+                cpuLoadTxt.textContent = `${cpuLabel}: ${cpuLd}%`;
                 
                 // Ocasionalmente, criar logs em tempo real
                 if (Math.random() > 0.6) {
@@ -532,17 +549,42 @@
                     let secs = String(now.getSeconds()).padStart(2, '0');
                     let timeStr = `${hours}:${mins}:${secs}`;
                     
-                    const logs = [
-                        { text: `[03:48:${secs}] Ping recebido do nó Kubernetes da AWS (US-EAST-1): Latência estável.`, color: "cyan" },
-                        { text: `[03:48:${secs}] Sincronização de Banco de Dados distribuído: Replicação concluída em 0.4ms.`, color: "green" },
-                        { text: `[03:48:${secs}] Requisição processada pelo AetherFlow AI: Cache hit no Vector DB.`, color: "purple" },
-                        { text: `[03:48:${secs}] Telemetria do núcleo: 0 exceções reportadas, memória em 42%.`, color: "" }
-                    ];
+                    const logTranslations = {
+                        pt: [
+                            `Ping recebido do nó Kubernetes da AWS (US-EAST-1): Latência estável.`,
+                            `Sincronização de Banco de Dados distribuído: Replicação concluída em 0.4ms.`,
+                            `Requisição processada pelo AetherFlow AI: Cache hit no Vector DB.`,
+                            `Telemetria do núcleo: 0 exceções reportadas, memória em 42%.`
+                        ],
+                        en: [
+                            `Ping received from AWS Kubernetes node (US-EAST-1): Latency stable.`,
+                            `Distributed Database sync: Replication completed in 0.4ms.`,
+                            `Request processed by AetherFlow AI: Cache hit in Vector DB.`,
+                            `Core telemetry: 0 exceptions reported, memory at 42%.`
+                        ],
+                        ru: [
+                            `Пинг получен от узла AWS Kubernetes (US-EAST-1): Задержка стабильна.`,
+                            `Синхронизация распределенной БД: Репликация завершена за 0,4 мс.`,
+                            `Запрос обработан AetherFlow AI: Попадание в кэш Векторной БД.`,
+                            `Телеметрия ядра: 0 исключений зарегистрировано, память на уровне 42%.`
+                        ],
+                        es: [
+                            `Ping recibido del nodo Kubernetes de AWS (US-EAST-1): Latencia estable.`,
+                            `Sincronización de Base de Datos distribuida: Replicación completada en 0.4ms.`,
+                            `Solicitud procesada por AetherFlow AI: Acierto de caché en Vector DB.`,
+                            `Telemetría del núcleo: 0 excepciones reportadas, memoria al 42%.`
+                        ]
+                    };
                     
-                    let choice = logs[Math.floor(Math.random() * logs.length)];
+                    const activeLogs = logTranslations[currentLang] || logTranslations.pt;
+                    const logColors = ["cyan", "green", "purple", ""];
+                    const randomIndex = Math.floor(Math.random() * activeLogs.length);
+                    const logText = activeLogs[randomIndex];
+                    const logColor = logColors[randomIndex];
+                    
                     let entry = document.createElement("div");
-                    entry.className = `log-entry ${choice.color}`;
-                    entry.textContent = choice.text;
+                    entry.className = `log-entry ${logColor}`;
+                    entry.textContent = `[${timeStr}] ${logText}`;
                     
                     logBox.appendChild(entry);
                     logBox.scrollTop = logBox.scrollHeight;
