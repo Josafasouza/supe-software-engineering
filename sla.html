@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLA de Engenharia | Supé Software Engineering</title>
+    
+    <!-- Meta Tags para SEO -->
+    <meta name="description" content="Acordo de Nível de Serviço (SLA) de Engenharia da Supé Software Engineering. Métricas de resposta, disponibilidade de servidores e padrões de qualidade de código.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="index.css">
+    
+    <style>
+        .doc-section {
+            padding: 10rem 0 6rem 0;
+            min-height: 80vh;
+        }
+        .doc-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 4rem;
+            position: relative;
+        }
+        .doc-header {
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        .doc-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .doc-meta {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            display: flex;
+            gap: 1.5rem;
+        }
+        .doc-body h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem 0;
+            color: var(--text-primary);
+            border-left: 2px solid var(--accent-green);
+            padding-left: 1rem;
+        }
+        .doc-body p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Estilização para as tabelas de alta tecnologia */
+        .tech-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            background: rgba(13, 11, 33, 0.2);
+        }
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-primary);
+            text-align: left;
+        }
+        .tech-table th {
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 1rem 1.2rem;
+            font-family: var(--font-heading);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .tech-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px dashed var(--border-glass);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .tech-table tr:last-child td {
+            border-bottom: none;
+        }
+        .table-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 600;
+        }
+        .table-badge.green {
+            background: rgba(0, 255, 135, 0.05);
+            border: 1px solid rgba(0, 255, 135, 0.15);
+            color: var(--accent-green);
+        }
+        .table-badge.cyan {
+            background: rgba(0, 242, 254, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            color: var(--accent-cyan);
+        }
+        
+        .back-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: var(--transition-fast);
+        }
+        .back-home-link:hover {
+            color: var(--accent-green);
+            transform: translateX(-3px);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Fundo de Grade Cibernética Estática e Efeitos Glow -->
+    <div class="cyber-grid"></div>
+    <div class="radial-glow glow-1"></div>
+    <div class="radial-glow glow-3"></div>
+
+    <!-- Header / Barra de Navegação -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad)" stroke-width="6"/>
+                        <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#7f00ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">SUPÉ</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#dna" class="nav-link">DNA</a></li>
+                    <li><a href="index.html#servicos" class="nav-link">Soluções</a></li>
+                    <li><a href="index.html#processo" class="nav-link">Integração</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="index.html#terminal" class="nav-link">Console</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="index.html#contato" class="btn-cta-nav">
+                    <span>Fale Conosco</span>
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="doc-section container">
+            <a href="index.html" class="back-home-link">
+                <i data-lucide="arrow-left"></i> Voltar para Home
+            </a>
+            
+            <div class="doc-container glass-panel">
+                <div class="doc-header">
+                    <h1 class="gradient-text">Acordo de SLA de Engenharia</h1>
+                    <div class="doc-meta">
+                        <span>Código do Núcleo: SP-SLA-ENG-3.0</span>
+                        <span>Última Compilação: 30 de Maio de 2026</span>
+                    </div>
+                </div>
+                
+                <div class="doc-body">
+                    <p>O Acordo de Nível de Serviço (SLA) de Engenharia da Supé Software Engineering define o nosso compromisso formal com a qualidade de entrega, uptime operacional e tempo de mitigação de incidentes. Para nós, estabilidade de sistemas não é um objetivo, mas um requisito essencial de engenharia.</p>
+                    
+                    <h2>1. Garantias de Disponibilidade de Produção (Uptime)</h2>
+                    <p>Para todas as plataformas corporativas hospedadas na nossa arquitetura gerenciada Kubernetes Zero-Trust, garantimos os seguintes patamares mensais de atividade:</p>
+                    
+                    <div class="tech-table-wrapper">
+                        <table class="tech-table">
+                            <thead>
+                                <tr>
+                                    <th>Classe de Serviço</th>
+                                    <th>Arquitetura Utilizada</th>
+                                    <th>Uptime Mínimo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Standard Cloud App</strong></td>
+                                    <td>Single Region Multi-AZ Serverless</td>
+                                    <td><span class="table-badge cyan">99.90%</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mission Critical Enterprise</strong></td>
+                                    <td>Multi-Region Active-Active Cloud Native</td>
+                                    <td><span class="table-badge green">99.99%</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI Engine Integrations</strong></td>
+                                    <td>Load-Balanced AI Gateway & Cache</td>
+                                    <td><span class="table-badge green">99.95%</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h2>2. Tempo de Mitigação de Incidentes (TTR)</h2>
+                    <p>Nossos engenheiros DevOps e SREs mantêm plantões ativos com monitoramento sintético contínuo. Em caso de alertas térmicos ou instabilidade de dados, comprometemo-nos a iniciar as operações de mitigação nos seguintes prazos contratuais:</p>
+                    
+                    <div class="tech-table-wrapper">
+                        <table class="tech-table">
+                            <thead>
+                                <tr>
+                                    <th>Severidade</th>
+                                    <th>Impacto Operacional</th>
+                                    <th>Tempo de Resposta (TTR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>S1 (Bloqueante)</strong></td>
+                                    <td>Sistema totalmente indisponível para usuários finais.</td>
+                                    <td><span class="table-badge green">&lt; 15 minutos</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>S2 (Alto Impacto)</strong></td>
+                                    <td>Gargalo severo em fluxos chave de negócio.</td>
+                                    <td><span class="table-badge cyan">&lt; 1 hora</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>S3 (Moderado)</strong></td>
+                                    <td>Instabilidades secundárias sem paralisação.</td>
+                                    <td><span class="table-badge cyan">&lt; 8 horas</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h2>3. Garantia de Rigor e Qualidade de Código</h2>
+                    <p>Todo artefato de software que sai de nossa esteira de desenvolvimento obedece rigorosamente às métricas contratuais de sanidade de código, atestadas pelo nosso CEO:</p>
+                    <ul>
+                        <li><strong>Cobertura de Testes:</strong> Mínimo de 85% de cobertura geral em testes unitários e de integração automatizados.</li>
+                        <li><strong>Segurança Extrema:</strong> Zero falhas críticas no pipeline de varredura estática de segurança do contêiner (SAST/DAST) pré-deploy.</li>
+                        <li><strong>Clean Architecture:</strong> Revisão dupla por engenheiros seniores (Peer Review) para garantir o desacoplamento de componentes e a facilidade de manutenção de longo prazo.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-area">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad-footer)" stroke-width="6"/>
+                            <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                            <defs>
+                                <linearGradient id="logo-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#7f00ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SUPÉ</span>
+                </a>
+                <p class="brand-slogan">Engenharia de software de altíssimo desempenho. Projetando o futuro através de ecossistemas perfeitamente integrados.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html#hero">Home</a></li>
+                        <li><a href="index.html#dna">DNA Supé</a></li>
+                        <li><a href="index.html#servicos">Soluções</a></li>
+                        <li><a href="index.html#processo">Integração</a></li>
+                        <li><a href="index.html#portfolio">Casos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="#"><i data-lucide="linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i data-lucide="github"></i> GitHub Space</a></li>
+                        <li><a href="#"><i data-lucide="twitter"></i> Twitter / X</a></li>
+                        <li><a href="#"><i data-lucide="youtube"></i> Dev Insights</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Segurança e Termos</h4>
+                    <ul>
+                        <li><a href="privacidade.html">Privacidade</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                        <li><a href="sla.html">SLA de Engenharia</a></li>
+                        <li><a href="status.html">Status do Núcleo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Supé Software Engineering. Todos os direitos reservados. CEO Josafá de Pinho Souza.</p>
+            <p class="tech-signature">Compilado com ⚡ Vanilla HTML/CSS/JS</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

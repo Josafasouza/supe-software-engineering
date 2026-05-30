@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supé Software Engineering | Engenharia de Software Suprema</title>
+    
+    <!-- Meta Tags para SEO -->
+    <meta name="description" content="A Supé Software Engineering é uma fábrica de software premium focada em alta tecnologia, inteligência artificial integrada, arquiteturas de nuvem resilientes e design excepcional. Liderada pelo CEO Josafá de Pinho Souza.">
+    <meta name="keywords" content="fábrica de software, engenharia de software, inteligência artificial, desenvolvimento web, desenvolvimento mobile, cloud computing, devops, Josafá de Pinho Souza, Supé Software">
+    <meta name="author" content="Supé Software Engineering">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Supé Software Engineering | Engenharia de Software Suprema">
+    <meta property="og:description" content="Transformamos ideias complexas em arquiteturas de software de altíssima escala e IA integrada.">
+    <meta property="og:image" content="assets/og_image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Supé Software Engineering | Engenharia de Software Suprema">
+    <meta property="twitter:description" content="Engenharia de software de elite para empresas globais.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    
+    <!-- Fundo de Grade Cibernética Estática e Efeitos Glow de Fundo -->
+    <div class="cyber-grid"></div>
+    <div class="radial-glow glow-1"></div>
+    <div class="radial-glow glow-2"></div>
+    <div class="radial-glow glow-3"></div>
+
+    <!-- Header / Barra de Navegação -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="#" class="logo-area" id="logo-nav">
+                <div class="logo-icon-wrapper">
+                    <!-- Ícone em SVG animado em index.css -->
+                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad)" stroke-width="6"/>
+                        <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#7f00ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">SUPÉ</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link active" id="nav-item-hero">Home</a></li>
+                    <li><a href="#dna" class="nav-link" id="nav-item-dna">DNA</a></li>
+                    <li><a href="#servicos" class="nav-link" id="nav-item-servicos">Soluções</a></li>
+                    <li><a href="#processo" class="nav-link" id="nav-item-processo">Integração</a></li>
+                    <li><a href="#portfolio" class="nav-link" id="nav-item-portfolio">Portfólio</a></li>
+                    <li><a href="#terminal" class="nav-link" id="nav-item-terminal">Console</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#contato" class="btn-cta-nav" id="btn-header-cta">
+                    <span>Fale Conosco</span>
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+                <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Abrir Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <canvas id="hero-canvas" class="hero-canvas"></canvas>
+            <div class="hero-content-wrapper container">
+                <div class="hero-badge" data-aos="fade-up">
+                    <span class="pulse-dot"></span>
+                    <span>Líderes em Engenharia de Software Suprema</span>
+                </div>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+                    Construindo o Amanhã com <span class="gradient-text">Engenharia Suprema</span>
+                </h1>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+                    Integramos inteligência artificial, arquitetura robusta e design de ponta. Moldamos códigos elegantes para converter desafios de negócios complexos em softwares inovadores de escala global.
+                </p>
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#contato" class="btn btn-primary" id="hero-cta-primary">
+                        <span>Iniciar um Projeto</span>
+                        <div class="glow-effect"></div>
+                    </a>
+                    <a href="#servicos" class="btn btn-secondary" id="hero-cta-secondary">
+                        <span>Explorar Soluções</span>
+                    </a>
+                </div>
+                <div class="hero-scroll-indicator" data-aos="fade-up" data-aos-delay="400">
+                    <span class="scroll-mouse">
+                        <span class="scroll-wheel"></span>
+                    </span>
+                    <span class="scroll-text">Deslize para integrar</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção DNA (CEO & Visão) -->
+        <section class="dna-section container" id="dna">
+            <div class="dna-grid">
+                <div class="dna-text" data-aos="fade-right">
+                    <div class="section-tag">
+                        <i data-lucide="binary"></i>
+                        <span>Nosso DNA</span>
+                    </div>
+                    <h2 class="section-title">
+                        Engenharia e Liderança de <span class="gradient-text-alt">Elite</span>
+                    </h2>
+                    <p class="section-desc">
+                        Na Supé, entendemos que software de alto nível não se resume apenas a linhas de código. É a união simbiótica entre matemática, design e inteligência de negócios. Desenvolvemos ecossistemas integrados focados no futuro digital das corporações mais exigentes.
+                    </p>
+                    
+                    <div class="ceo-quote-card">
+                        <i data-lucide="quote" class="quote-icon"></i>
+                        <p class="ceo-quote">
+                            "A tecnologia de verdade é invisível e perfeitamente integrada. Nosso compromisso na Supé é arquitetar sistemas que parecem simples para o usuário final, mas operam com robustez e inteligência extremas no núcleo de cada negócio."
+                        </p>
+                        <div class="ceo-info">
+                            <div class="ceo-signature-wrapper">
+                                <span class="ceo-name">Josafá de Pinho Souza</span>
+                                <span class="ceo-title">Fundador & CEO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dna-visual" data-aos="fade-left">
+                    <div class="glass-frame">
+                        <div class="glass-header">
+                            <div class="header-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="glass-title">supe_core_engine.sh</span>
+                        </div>
+                        <div class="glass-body">
+                            <!-- Retrato ou Imagem Corporativa do CEO gerada por IA -->
+                            <div class="ceo-image-container">
+                                <img src="assets/ceo_avatar.png" alt="Josafá de Pinho Souza, CEO da Supé Software Engineering" id="ceo-portrait">
+                                <div class="image-overlay-glow"></div>
+                            </div>
+                            <div class="stat-badge stat-experience">
+                                <div class="stat-number">15+</div>
+                                <div class="stat-label">Anos de Inovação</div>
+                            </div>
+                            <div class="stat-badge stat-satisfaction">
+                                <i data-lucide="award"></i>
+                                <span>Qualidade Suprema</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Soluções Integradas (Serviços) -->
+        <section class="servicos-section container" id="servicos">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag center">
+                    <i data-lucide="cpu"></i>
+                    <span>Nossa Expertise</span>
+                </div>
+                <h2 class="section-title center">
+                    Soluções de <span class="gradient-text">Nova Geração</span>
+                </h2>
+                <p class="section-desc center">
+                    Do design à infraestrutura, cobrimos todo o espectro do ciclo de engenharia de software com tecnologias modernas e metodologias ágeis de ponta.
+                </p>
+            </div>
+
+            <div class="servicos-grid">
+                <!-- Card 1 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100" id="card-service-1">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon-box cyan">
+                            <i data-lucide="code-2"></i>
+                        </div>
+                        <h3>Sistemas Customizados</h3>
+                        <p>Plataformas corporativas sob medida, APIs escaláveis e integrações complexas construídas com as tecnologias mais eficientes do mercado.</p>
+                        <ul class="card-features">
+                            <li><i data-lucide="check-circle-2"></i> React / Next.js / NestJS</li>
+                            <li><i data-lucide="check-circle-2"></i> Arquitetura em Microsserviços</li>
+                            <li><i data-lucide="check-circle-2"></i> Performance Ultra Otimizada</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200" id="card-service-2">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon-box purple">
+                            <i data-lucide="brain-circuit"></i>
+                        </div>
+                        <h3>Inteligência Artificial</h3>
+                        <p>Integramos Modelos de Linguagem (LLMs), Visão Computacional e IA Generativa diretamente nos fluxos de trabalho e produtos de nossos parceiros.</p>
+                        <ul class="card-features">
+                            <li><i data-lucide="check-circle-2"></i> Agentes Autônomos de IA</li>
+                            <li><i data-lucide="check-circle-2"></i> RAG (Retrieval-Augmented Generation)</li>
+                            <li><i data-lucide="check-circle-2"></i> Modelos Preditivos Dedicados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300" id="card-service-3">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon-box blue">
+                            <i data-lucide="cloud"></i>
+                        </div>
+                        <h3>Arquitetura Cloud & DevOps</h3>
+                        <p>Infraestruturas resilientes na nuvem, pipelines automatizados de CI/CD e práticas de segurança corporativa robustas baseadas em conformidade (IaC).</p>
+                        <ul class="card-features">
+                            <li><i data-lucide="check-circle-2"></i> AWS / GCP / Azure</li>
+                            <li><i data-lucide="check-circle-2"></i> Kubernetes & Docker</li>
+                            <li><i data-lucide="check-circle-2"></i> Segurança Zero-Trust</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400" id="card-service-4">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon-box magenta">
+                            <i data-lucide="layers"></i>
+                        </div>
+                        <h3>Design de Experiência</h3>
+                        <p>Interfaces disruptivas, protótipos de alta fidelidade e pesquisas com usuários para garantir taxas extraordinárias de adoção e engajamento digital.</p>
+                        <ul class="card-features">
+                            <li><i data-lucide="check-circle-2"></i> UX Research Baseado em Dados</li>
+                            <li><i data-lucide="check-circle-2"></i> Design System Escalável</li>
+                            <li><i data-lucide="check-circle-2"></i> Animações de Altíssima Fluidez</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Processo / Integração Tecnológica -->
+        <section class="processo-section container" id="processo">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag center">
+                    <i data-lucide="git-branch"></i>
+                    <span>O Motor de Integração</span>
+                </div>
+                <h2 class="section-title center">
+                    Nossa Engenharia <span class="gradient-text-alt">na Prática</span>
+                </h2>
+                <p class="section-desc center">
+                    Veja como integramos estratégia, desenvolvimento, inteligência artificial e computação em nuvem para criar ecossistemas digitais indestrutíveis.
+                </p>
+            </div>
+
+            <!-- Mecanismo de Integração Interativo -->
+            <div class="integration-motor-wrapper" data-aos="zoom-in">
+                <div class="integration-display">
+                    <div class="integration-map">
+                        <div class="integration-node node-1 active" data-step="1" id="node-step-1">
+                            <div class="node-glow"></div>
+                            <div class="node-inner">
+                                <i data-lucide="lightbulb"></i>
+                            </div>
+                            <span class="node-title">1. Concepção</span>
+                        </div>
+                        
+                        <div class="integration-line line-12 active">
+                            <div class="pulse-particle"></div>
+                        </div>
+
+                        <div class="integration-node node-2" data-step="2" id="node-step-2">
+                            <div class="node-glow"></div>
+                            <div class="node-inner">
+                                <i data-lucide="layers"></i>
+                            </div>
+                            <span class="node-title">2. Arquitetura</span>
+                        </div>
+                        
+                        <div class="integration-line line-23">
+                            <div class="pulse-particle"></div>
+                        </div>
+
+                        <div class="integration-node node-3" data-step="3" id="node-step-3">
+                            <div class="node-glow"></div>
+                            <div class="node-inner">
+                                <i data-lucide="terminal"></i>
+                            </div>
+                            <span class="node-title">3. Codificação</span>
+                        </div>
+                        
+                        <div class="integration-line line-34">
+                            <div class="pulse-particle"></div>
+                        </div>
+
+                        <div class="integration-node node-4" data-step="4" id="node-step-4">
+                            <div class="node-glow"></div>
+                            <div class="node-inner">
+                                <i data-lucide="sparkles"></i>
+                            </div>
+                            <span class="node-title">4. Fusão de IA</span>
+                        </div>
+                        
+                        <div class="integration-line line-45">
+                            <div class="pulse-particle"></div>
+                        </div>
+
+                        <div class="integration-node node-5" data-step="5" id="node-step-5">
+                            <div class="node-glow"></div>
+                            <div class="node-inner">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                            <span class="node-title">5. Deploy & CI/CD</span>
+                        </div>
+                    </div>
+
+                    <div class="integration-details-box glass-panel">
+                        <div class="step-badge" id="step-number-display">Etapa 01</div>
+                        <h3 id="step-title-display">Concepção Estrutural & Discovery</h3>
+                        <p id="step-desc-display">Imersão completa no ecossistema do cliente para mapear fluxos, identificar gargalos e planejar a integração ideal entre necessidades operacionais e tecnologias emergentes.</p>
+                        <div class="step-metrics">
+                            <span class="metric-item"><i data-lucide="clock"></i> Tempo médio: 2 semanas</span>
+                            <span class="metric-item"><i data-lucide="users"></i> Time: Analistas e UX Directors</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Portfólio / Case Studies -->
+        <section class="portfolio-section container" id="portfolio">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag center">
+                    <i data-lucide="folder-git-2"></i>
+                    <span>Showcase Tecnológico</span>
+                </div>
+                <h2 class="section-title center">
+                    Nossas <span class="gradient-text">Obras de Engenharia</span>
+                </h2>
+                <p class="section-desc center">
+                    Aplicações de altíssimo desempenho, sistemas inteligentes de tomada de decisão e plataformas web construídas de ponta a ponta pela nossa equipe.
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Case 1 -->
+                <div class="portfolio-item glass-panel" data-aos="fade-up" id="project-case-1">
+                    <div class="portfolio-image-wrapper">
+                        <img src="assets/project_ai.png" alt="Plataforma de IA Generativa integrada desenvolvida por Supé" id="img-project-1">
+                        <div class="image-gradient"></div>
+                        <div class="project-tags">
+                            <span class="p-tag">Inteligência Artificial</span>
+                            <span class="p-tag">AWS Cloud</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>AetherFlow AI Enterprise</h3>
+                        <p>Orquestrador inteligente de fluxos organizacionais integrado com IA Generativa privada e RAG para o setor financeiro.</p>
+                        <div class="portfolio-footer">
+                            <span class="stat-highlight">99.9% Disponibilidade</span>
+                            <a href="#contato" class="project-link">
+                                <span>Ver Detalhes</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2 -->
+                <div class="portfolio-item glass-panel" data-aos="fade-up" data-aos-delay="150" id="project-case-2">
+                    <div class="portfolio-image-wrapper">
+                        <img src="assets/project_app.png" alt="Painel analítico SaaS multi-locação desenvolvido por Supé" id="img-project-2">
+                        <div class="image-gradient"></div>
+                        <div class="project-tags">
+                            <span class="p-tag">Next.js & NestJS</span>
+                            <span class="p-tag">Kubernetes</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Helios Analytics Suite</h3>
+                        <p>Dashboard de processamento de Big Data com atualizações em tempo real para controle logístico de grandes frotas transcontinentais.</p>
+                        <div class="portfolio-footer">
+                            <span class="stat-highlight">10M+ Eventos/sec</span>
+                            <a href="#contato" class="project-link">
+                                <span>Ver Detalhes</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Terminal Interativo de Depuração (Easter Egg de Alta Tecnologia) -->
+        <section class="terminal-section container" id="terminal">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-tag center">
+                    <i data-lucide="terminal"></i>
+                    <span>Console de Integração</span>
+                </div>
+                <h2 class="section-title center">
+                    Interaja com o <span class="gradient-text-alt">Nosso Núcleo</span>
+                </h2>
+                <p class="section-desc center">
+                    Experimente nossa simulação de console de engenharia em tempo real. Digite comandos ou clique nos atalhos para verificar a resiliência e compilar novos módulos.
+                </p>
+            </div>
+
+            <div class="terminal-container glass-panel" data-aos="zoom-in" id="interactive-terminal-box">
+                <div class="terminal-header">
+                    <div class="header-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="terminal-title">guest@supe-core-engine:~$</span>
+                    <div class="terminal-status-badge">
+                        <span class="pulse-dot-green"></span>
+                        <span>ONLINE</span>
+                    </div>
+                </div>
+                <div class="terminal-body" id="terminal-body-console">
+                    <p class="terminal-text cyan-text">--- SUPÉ SOFTWARE ENGINEERING CORE v3.1.2 ---</p>
+                    <p class="terminal-text gray-text">Inicializando conexão segura TLS 1.3...</p>
+                    <p class="terminal-text green-text">Conexão estabelecida com sucesso.</p>
+                    <p class="terminal-text">Para obter ajuda e ver os comandos disponíveis, digite <span class="highlight-cmd">help</span>.</p>
+                    <br>
+                    <div class="terminal-output-area" id="terminal-output-area"></div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">></span>
+                        <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" placeholder="Digite 'help' e aperte Enter...">
+                    </div>
+                </div>
+                <div class="terminal-shortcuts">
+                    <span class="shortcut-label">Atalhos rápidos:</span>
+                    <button class="btn-shortcut" data-cmd="about">about_ceo</button>
+                    <button class="btn-shortcut" data-cmd="stack">show_stack</button>
+                    <button class="btn-shortcut" data-cmd="compile">compile_ai</button>
+                    <button class="btn-shortcut" data-cmd="clear">clear_console</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Contato / Conversão -->
+        <section class="contato-section container" id="contato">
+            <div class="contato-grid">
+                <div class="contato-info" data-aos="fade-right">
+                    <div class="section-tag">
+                        <i data-lucide="message-square"></i>
+                        <span>Fale com Engenheiros</span>
+                    </div>
+                    <h2 class="section-title">
+                        Pronto para Iniciar sua <span class="gradient-text">Evolução Digital?</span>
+                    </h2>
+                    <p class="section-desc">
+                        Nossa equipe está pronta para desenhar a melhor arquitetura técnica sob medida para o seu desafio corporativo. Diga-nos o que você deseja criar e nós entregamos a melhor engenharia.
+                    </p>
+
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <div class="icon-circle">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <div>
+                                <span class="detail-label">E-mail corporativo</span>
+                                <span class="detail-value">contato@supe.dev</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail-item">
+                            <div class="icon-circle">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div>
+                                <span class="detail-label">Matriz</span>
+                                <span class="detail-value">Av. da Tecnologia, 1024 - Hub Digital</span>
+                            </div>
+                        </div>
+
+                        <div class="contact-detail-item">
+                            <div class="icon-circle">
+                                <i data-lucide="lock"></i>
+                            </div>
+                            <div>
+                                <span class="detail-label">Privacidade & Conformidade</span>
+                                <span class="detail-value">LGPD e ISO 27001 em conformidade</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contato-form-wrapper glass-panel" data-aos="fade-left">
+                    <form id="project-planner-form" class="project-planner-form">
+                        <h3>Planeje seu Software</h3>
+                        <p class="form-subtitle">Selecione suas preferências e entraremos em contato com uma proposta de arquitetura inicial.</p>
+                        
+                        <div class="form-group">
+                            <label for="form-name">Seu Nome *</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="user" class="input-icon"></i>
+                                <input type="text" id="form-name" required placeholder="Ex: Josafá de Pinho">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-email">E-mail Corporativo *</label>
+                            <div class="input-wrapper">
+                                <i data-lucide="mail" class="input-icon"></i>
+                                <input type="email" id="form-email" required placeholder="Ex: josafa@supe.dev">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Qual é a principal necessidade? *</label>
+                            <div class="radio-cards-grid">
+                                <label class="radio-card active">
+                                    <input type="radio" name="project-type" value="custom_software" checked>
+                                    <i data-lucide="code-2"></i>
+                                    <span>Software Customizado</span>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="project-type" value="ai_integration">
+                                    <i data-lucide="brain-circuit"></i>
+                                    <span>Integração de IA</span>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="project-type" value="cloud_architecture">
+                                    <i data-lucide="cloud"></i>
+                                    <span>Nuvem e Escala</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-message">Breve descrição do desafio *</label>
+                            <div class="input-wrapper">
+                                <textarea id="form-message" required placeholder="Descreva brevemente sua ideia ou o problema de negócio que deseja solucionar..." rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="btn-submit-form">
+                            <span>Enviar Requisição de Arquitetura</span>
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                    
+                    <!-- Estado de Sucesso no envio do formulário -->
+                    <div id="form-success-state" class="form-success-state hidden">
+                        <div class="success-animation-wrapper">
+                            <div class="success-ring"></div>
+                            <div class="success-checkmark-box">
+                                <i data-lucide="check" class="check-icon"></i>
+                            </div>
+                        </div>
+                        <h3>Requisição Compilada!</h3>
+                        <p>Sua requisição de arquitetura foi enviada e processada. Um arquiteto de software da Supé entrará em contato em menos de 2 horas úteis.</p>
+                        <button class="btn btn-secondary btn-sm" id="btn-reset-form">Enviar outra mensagem</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top container">
+            <div class="footer-brand">
+                <a href="#" class="logo-area">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad-footer)" stroke-width="6"/>
+                            <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                            <defs>
+                                <linearGradient id="logo-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#7f00ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SUPÉ</span>
+                </a>
+                <p class="brand-slogan">Engenharia de software de altíssimo desempenho. Projetando o futuro através de ecossistemas perfeitamente integrados.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#dna">DNA Supé</a></li>
+                        <li><a href="#servicos">Soluções</a></li>
+                        <li><a href="#processo">Integração</a></li>
+                        <li><a href="#portfolio">Casos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="#"><i data-lucide="linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i data-lucide="github"></i> GitHub Space</a></li>
+                        <li><a href="#"><i data-lucide="twitter"></i> Twitter / X</a></li>
+                        <li><a href="#"><i data-lucide="youtube"></i> Dev Insights</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Segurança e Termos</h4>
+                    <ul>
+                        <li><a href="privacidade.html">Privacidade</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                        <li><a href="sla.html">SLA de Engenharia</a></li>
+                        <li><a href="status.html">Status do Núcleo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Supé Software Engineering. Todos os direitos reservados. CEO Josafá de Pinho Souza.</p>
+            <p class="tech-signature">Compilado com ⚡ Vanilla HTML/CSS/JS</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Lucide Icons para carregar os ícones modernos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Inicializar os ícones imediatamente após carregamento
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+    <!-- Script Principal -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso | Supé Software Engineering</title>
+    
+    <!-- Meta Tags para SEO -->
+    <meta name="description" content="Termos de Uso e Condições Gerais dos Serviços Digitais da Supé Software Engineering. Rigor técnico e diretrizes contratuais claras.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="index.css">
+    
+    <style>
+        .doc-section {
+            padding: 10rem 0 6rem 0;
+            min-height: 80vh;
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem;
+            position: relative;
+        }
+        .doc-header {
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        .doc-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .doc-meta {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            display: flex;
+            gap: 1.5rem;
+        }
+        .doc-body h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem 0;
+            color: var(--text-primary);
+            border-left: 2px solid var(--accent-purple);
+            padding-left: 1rem;
+        }
+        .doc-body p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .doc-body ul {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .doc-body li {
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        .doc-body li::before {
+            content: "└";
+            position: absolute;
+            left: -1.2rem;
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+        .back-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: var(--transition-fast);
+        }
+        .back-home-link:hover {
+            color: var(--accent-purple);
+            transform: translateX(-3px);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Fundo de Grade Cibernética Estática e Efeitos Glow -->
+    <div class="cyber-grid"></div>
+    <div class="radial-glow glow-1"></div>
+    <div class="radial-glow glow-2"></div>
+
+    <!-- Header / Barra de Navegação -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad)" stroke-width="6"/>
+                        <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#7f00ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">SUPÉ</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#dna" class="nav-link">DNA</a></li>
+                    <li><a href="index.html#servicos" class="nav-link">Soluções</a></li>
+                    <li><a href="index.html#processo" class="nav-link">Integração</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="index.html#terminal" class="nav-link">Console</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="index.html#contato" class="btn-cta-nav">
+                    <span>Fale Conosco</span>
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="doc-section container">
+            <a href="index.html" class="back-home-link">
+                <i data-lucide="arrow-left"></i> Voltar para Home
+            </a>
+            
+            <div class="doc-container glass-panel">
+                <div class="doc-header">
+                    <h1 class="gradient-text-alt">Termos de Uso</h1>
+                    <div class="doc-meta">
+                        <span>Código do Núcleo: SP-TERMS-2026</span>
+                        <span>Última Compilação: 30 de Maio de 2026</span>
+                    </div>
+                </div>
+                
+                <div class="doc-body">
+                    <p>Bem-vindo ao ecossistema digital da Supé Software Engineering. Ao acessar nosso portal institucional, utilizar nossos consoles interativos ou planejar seus projetos digitais através do nosso hub comercial, você declara estar integralmente de acordo com as diretrizes e regras operacionais estabelecidas abaixo.</p>
+                    
+                    <h2>1. Concessão de Licença do Console</h2>
+                    <p>O console interativo de depuração (`supe-core-engine`) disponível neste website tem caráter meramente demonstrativo e lúdico:</p>
+                    <ul>
+                        <li>É estritamente proibido tentar acoplar scripts de injeção maliciosa (SQL, XSS) ou enviar pacotes DDoS com a intenção de romper a integridade estrutural do sistema.</li>
+                        <li>A Supé se reserva o direito de monitorar logs de atividade do console para auditoria contínua de segurança.</li>
+                    </ul>
+                    
+                    <h2>2. Propriedade Intelectual Suprema</h2>
+                    <p>Todas as marcas, códigos de engenharia, animações em JavaScript, layout em CSS, marcas de logotipo hexágono e as ilustrações/mockups gerados por IA exibidos no portal são propriedade intelectual exclusiva da **Supé Software Engineering**, sob tutela da gestão do CEO **Josafá de Pinho Souza**:</p>
+                    <ul>
+                        <li>Nenhuma parcela do material deste website pode ser copiada, clonada ou reproduzida para fins comerciais externos sem autorização expressa e escrita assinada pela diretoria comercial da Supé.</li>
+                    </ul>
+                    
+                    <h2>3. Limitação de Responsabilidade</h2>
+                    <p>A Supé Software Engineering busca a perfeição matemática em todas as suas criações, contudo:</p>
+                    <ul>
+                        <li>O conteúdo informativo e simulações deste site são fornecidos "no estado em que se encontram", sem garantias explícitas de utilidade para propostas jurídicas contratuais específicas antes da assinatura do Acordo de SLA oficial.</li>
+                        <li>Não nos responsabilizamos por quaisquer danos diretos ou indiretos decorrentes da perda de conexão temporária ou bugs no carregamento do Canvas interativo.</li>
+                    </ul>
+
+                    <h2>4. Jurisdição Competente</h2>
+                    <p>Estes termos e toda a operação cibernética da Supé são regulados pelas leis da República Federativa do Brasil. Fica eleito o foro da nossa comarca matriz para dirimir quaisquer eventuais litígios decorrentes da interpretação destas cláusulas.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-area">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad-footer)" stroke-width="6"/>
+                            <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                            <defs>
+                                <linearGradient id="logo-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#7f00ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SUPÉ</span>
+                </a>
+                <p class="brand-slogan">Engenharia de software de altíssimo desempenho. Projetando o futuro através de ecessistemas perfeitamente integrados.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html#hero">Home</a></li>
+                        <li><a href="index.html#dna">DNA Supé</a></li>
+                        <li><a href="index.html#servicos">Soluções</a></li>
+                        <li><a href="index.html#processo">Integração</a></li>
+                        <li><a href="index.html#portfolio">Casos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="#"><i data-lucide="linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i data-lucide="github"></i> GitHub Space</a></li>
+                        <li><a href="#"><i data-lucide="twitter"></i> Twitter / X</a></li>
+                        <li><a href="#"><i data-lucide="youtube"></i> Dev Insights</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Segurança e Termos</h4>
+                    <ul>
+                        <li><a href="privacidade.html">Privacidade</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                        <li><a href="sla.html">SLA de Engenharia</a></li>
+                        <li><a href="status.html">Status do Núcleo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Supé Software Engineering. Todos os direitos reservados. CEO Josafá de Pinho Souza.</p>
+            <p class="tech-signature">Compilado com ⚡ Vanilla HTML/CSS/JS</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

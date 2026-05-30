@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diretrizes de Privacidade | Supé Software Engineering</title>
+    
+    <!-- Meta Tags para SEO -->
+    <meta name="description" content="Diretrizes e Políticas de Privacidade e Proteção de Dados da Supé Software Engineering. Transparência cibernética e conformidade rígida com a LGPD.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="index.css">
+    
+    <style>
+        /* Estilos específicos para páginas de conteúdo/documentação */
+        .doc-section {
+            padding: 10rem 0 6rem 0;
+            min-height: 80vh;
+        }
+        .doc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem;
+            position: relative;
+        }
+        .doc-header {
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        .doc-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .doc-meta {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            display: flex;
+            gap: 1.5rem;
+        }
+        .doc-body h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem 0;
+            color: var(--text-primary);
+            border-left: 2px solid var(--accent-cyan);
+            padding-left: 1rem;
+        }
+        .doc-body p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .doc-body ul {
+            list-style: none;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .doc-body li {
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        .doc-body li::before {
+            content: "└";
+            position: absolute;
+            left: -1.2rem;
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+        .back-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: var(--transition-fast);
+        }
+        .back-home-link:hover {
+            color: var(--accent-cyan);
+            transform: translateX(-3px);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Fundo de Grade Cibernética Estática e Efeitos Glow -->
+    <div class="cyber-grid"></div>
+    <div class="radial-glow glow-1"></div>
+    <div class="radial-glow glow-2"></div>
+
+    <!-- Header / Barra de Navegação -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad)" stroke-width="6"/>
+                        <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#7f00ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">SUPÉ</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#dna" class="nav-link">DNA</a></li>
+                    <li><a href="index.html#servicos" class="nav-link">Soluções</a></li>
+                    <li><a href="index.html#processo" class="nav-link">Integração</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="index.html#terminal" class="nav-link">Console</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="index.html#contato" class="btn-cta-nav">
+                    <span>Fale Conosco</span>
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="doc-section container">
+            <a href="index.html" class="back-home-link">
+                <i data-lucide="arrow-left"></i> Voltar para Home
+            </a>
+            
+            <div class="doc-container glass-panel">
+                <div class="doc-header">
+                    <h1 class="gradient-text">Política de Privacidade</h1>
+                    <div class="doc-meta">
+                        <span>Código do Núcleo: SP-PRIV-2026</span>
+                        <span>Última Compilação: 30 de Maio de 2026</span>
+                    </div>
+                </div>
+                
+                <div class="doc-body">
+                    <p>Na Supé Software Engineering, levamos a segurança cibernética e a privacidade de dados com o mesmo rigor matemático que aplicamos às nossas arquiteturas de código. Esta política descreve como nosso ecossistema coleta, trata e protege suas informações digitais em total conformidade com a Lei Geral de Proteção de Dados (LGPD) e diretrizes internacionais de conformidade.</p>
+                    
+                    <h2>1. Coleta de Telemetria e Dados</h2>
+                    <p>Coletamos dados estritamente necessários para otimizar sua experiência e fornecer orçamentos de engenharia confiáveis:</p>
+                    <ul>
+                        <li><strong>Dados de Identificação:</strong> Nome, endereço de e-mail corporativo fornecidos ativamente no formulário de contato.</li>
+                        <li><strong>Dados Técnicos (Telemetria):</strong> Endereço IP, tipo de navegador, sistema operacional e dados analíticos de fluxo de navegação no site.</li>
+                        <li><strong>Especificações do Projeto:</strong> Detalhes da arquitetura de software requisitada no nosso configurador de projetos.</li>
+                    </ul>
+                    
+                    <h2>2. Tratamento e Finalidade</h2>
+                    <p>Seus dados são criptografados na origem e tratados exclusivamente para os seguintes propósitos corporativos:</p>
+                    <ul>
+                        <li>Resposta a solicitações de arquitetura de software e contato comercial direto.</li>
+                        <li>Análise de resiliência e estabilidade da nossa própria infraestrutura web.</li>
+                        <li>Segurança do sistema, prevenindo ataques cibernéticos de negação de serviço (DDoS) no console central.</li>
+                    </ul>
+                    
+                    <h2>3. Proteção e Segurança Ativa</h2>
+                    <p>Todos os dados confidenciais sob nossa responsabilidade são guardados em bancos de dados distribuídos protegidos sob o padrão de segurança <strong>Zero-Trust</strong>:</p>
+                    <ul>
+                        <li>Criptografia de ponta a ponta (AES-256 no armazenamento e TLS 1.3 no tráfego).</li>
+                        <li>Controle rigoroso de privilégios de acesso aos dados (apenas engenheiros autorizados e auditados pelo CEO Josafá de Pinho Souza).</li>
+                        <li>Backups distribuídos geograficamente com replicação assíncrona tolerante a falhas catastróficas.</li>
+                    </ul>
+
+                    <h2>4. Seus Direitos (Portabilidade e Exclusão)</h2>
+                    <p>Como titular dos dados, você possui total soberania cibernética sobre seus registros. Você pode a qualquer momento requisitar ao nosso núcleo (via contato@supe.dev) a portabilidade, retificação completa ou a destruição definitiva de todas as informações armazenadas no nosso banco.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-area">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad-footer)" stroke-width="6"/>
+                            <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                            <defs>
+                                <linearGradient id="logo-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#7f00ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SUPÉ</span>
+                </a>
+                <p class="brand-slogan">Engenharia de software de altíssimo desempenho. Projetando o futuro através de ecossistemas perfeitamente integrados.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html#hero">Home</a></li>
+                        <li><a href="index.html#dna">DNA Supé</a></li>
+                        <li><a href="index.html#servicos">Soluções</a></li>
+                        <li><a href="index.html#processo">Integração</a></li>
+                        <li><a href="index.html#portfolio">Casos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="#"><i data-lucide="linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i data-lucide="github"></i> GitHub Space</a></li>
+                        <li><a href="#"><i data-lucide="twitter"></i> Twitter / X</a></li>
+                        <li><a href="#"><i data-lucide="youtube"></i> Dev Insights</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Segurança e Termos</h4>
+                    <ul>
+                        <li><a href="privacidade.html">Privacidade</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                        <li><a href="sla.html">SLA de Engenharia</a></li>
+                        <li><a href="status.html">Status do Núcleo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Supé Software Engineering. Todos os direitos reservados. CEO Josafá de Pinho Souza.</p>
+            <p class="tech-signature">Compilado com ⚡ Vanilla HTML/CSS/JS</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

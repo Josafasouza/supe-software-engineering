@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status do Núcleo | Supé Software Engineering</title>
+    
+    <!-- Meta Tags para SEO -->
+    <meta name="description" content="Dashboard de Status em tempo real do ecossistema e servidores da Supé Software Engineering. Transparência operacional completa e métricas ao vivo.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="index.css">
+    
+    <style>
+        .status-section {
+            padding: 10rem 0 6rem 0;
+            min-height: 90vh;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+        
+        .status-header-panel {
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .status-header-panel h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .global-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(0, 255, 135, 0.05);
+            border: 1px solid rgba(0, 255, 135, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+        
+        /* Painel com cards de monitoramento de subsistemas */
+        .subsistemas-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        
+        .subsistema-card {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .subsistema-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .subsistema-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+        }
+        .subsistema-card:hover .subsistema-icon {
+            color: var(--accent-cyan);
+            border-color: rgba(0, 242, 254, 0.3);
+            background: rgba(0, 242, 254, 0.03);
+        }
+        .subsistema-name h3 {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .subsistema-metrics {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 1rem;
+        }
+        .subsistema-status {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-green);
+        }
+        
+        /* Gráfico de Telemetria Dinâmico (Canvas) */
+        .telemetria-panel {
+            padding: 2.5rem;
+            height: 100%;
+        }
+        .telemetria-panel h2 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .canvas-container {
+            width: 100%;
+            height: 240px;
+            border: 1px dashed var(--border-glass);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: rgba(4, 3, 10, 0.5);
+            position: relative;
+        }
+        #latency-chart {
+            width: 100%;
+            height: 100%;
+        }
+        .console-log-status {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.8rem;
+            background: rgba(4, 3, 10, 0.8);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            padding: 1.2rem;
+            height: 160px;
+            overflow-y: auto;
+            color: var(--text-secondary);
+        }
+        .log-entry {
+            margin-bottom: 0.4rem;
+            line-height: 1.4;
+        }
+        .log-entry.green { color: var(--accent-green); }
+        .log-entry.cyan { color: var(--accent-cyan); }
+        .log-entry.purple { color: var(--accent-purple); }
+        
+        .back-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            transition: var(--transition-fast);
+        }
+        .back-home-link:hover {
+            color: var(--accent-cyan);
+            transform: translateX(-3px);
+        }
+        
+        @media (max-width: 1024px) {
+            .status-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Fundo de Grade Cibernética Estática e Efeitos Glow -->
+    <div class="cyber-grid"></div>
+    <div class="radial-glow glow-1"></div>
+    <div class="radial-glow glow-2"></div>
+
+    <!-- Header / Barra de Navegação -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad)" stroke-width="6"/>
+                        <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#7f00ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">SUPÉ</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#dna" class="nav-link">DNA</a></li>
+                    <li><a href="index.html#servicos" class="nav-link">Soluções</a></li>
+                    <li><a href="index.html#processo" class="nav-link">Integração</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="index.html#terminal" class="nav-link">Console</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="index.html#contato" class="btn-cta-nav">
+                    <span>Fale Conosco</span>
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="status-section container">
+            <a href="index.html" class="back-home-link">
+                <i data-lucide="arrow-left"></i> Voltar para Home
+            </a>
+            
+            <div class="status-header-panel">
+                <div>
+                    <h1 class="gradient-text">Status do Núcleo</h1>
+                    <p style="color: var(--text-secondary);">Mapeamento de telemetria em tempo real dos microsserviços Supé.</p>
+                </div>
+                <div class="global-status-badge">
+                    <span class="pulse-dot-green"></span>
+                    <span>TODOS OS SISTEMAS ONLINE</span>
+                </div>
+            </div>
+            
+            <div class="status-grid">
+                
+                <!-- Coluna de Subsistemas -->
+                <div class="subsistemas-wrapper">
+                    
+                    <div class="subsitema-card glass-panel">
+                        <div class="subsistema-info">
+                            <div class="subsistema-icon">
+                                <i data-lucide="brain-circuit"></i>
+                            </div>
+                            <div class="subsistema-name">
+                                <h3>AetherFlow AI Gateway</h3>
+                                <div class="subsistema-metrics">
+                                    <span>Uptime: 99.98%</span>
+                                    <span id="ai-latency">Latência: 138ms</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="subsistema-status">
+                            <span class="pulse-dot-green"></span>
+                            <span>OPERACIONAL</span>
+                        </div>
+                    </div>
+
+                    <div class="subsitema-card glass-panel">
+                        <div class="subsistema-info">
+                            <div class="subsistema-icon">
+                                <i data-lucide="cpu"></i>
+                            </div>
+                            <div class="subsistema-name">
+                                <h3>Core API Clusters (Go REST Engine)</h3>
+                                <div class="subsistema-metrics">
+                                    <span>Uptime: 100.00%</span>
+                                    <span id="api-latency">Latência: 2.1ms</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="subsistema-status">
+                            <span class="pulse-dot-green"></span>
+                            <span>OPERACIONAL</span>
+                        </div>
+                    </div>
+
+                    <div class="subsitema-card glass-panel">
+                        <div class="subsistema-info">
+                            <div class="subsistema-icon">
+                                <i data-lucide="database"></i>
+                            </div>
+                            <div class="subsistema-name">
+                                <h3>Vector DB Storage (Pinecone Cluster)</h3>
+                                <div class="subsistema-metrics">
+                                    <span>Uptime: 99.99%</span>
+                                    <span id="vdb-latency">Latência: 7.9ms</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="subsistema-status">
+                            <span class="pulse-dot-green"></span>
+                            <span>OPERACIONAL</span>
+                        </div>
+                    </div>
+
+                    <div class="subsitema-card glass-panel">
+                        <div class="subsistema-info">
+                            <div class="subsistema-icon">
+                                <i data-lucide="cloud"></i>
+                            </div>
+                            <div class="subsistema-name">
+                                <h3>Kubernetes Nodes (AWS Multi-AZ)</h3>
+                                <div class="subsistema-metrics">
+                                    <span>Uptime: 100.00%</span>
+                                    <span id="cpu-load">Carga da CPU: 12%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="subsistema-status">
+                            <span class="pulse-dot-green"></span>
+                            <span>OPERACIONAL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Painel de Telemetria Dinâmica -->
+                <div class="telemetria-panel glass-panel">
+                    <h2><i data-lucide="activity" style="color: var(--accent-cyan);"></i> Latência Geral da Rede (ms)</h2>
+                    
+                    <div class="canvas-container">
+                        <canvas id="latency-chart"></canvas>
+                    </div>
+                    
+                    <div class="console-log-status" id="console-log-status">
+                        <!--Logs em tempo real populados via JavaScript -->
+                        <div class="log-entry gray-text">[30/05/2026 03:48:00] -- Monitoramento Inicializado --</div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-area">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad-footer)" stroke-width="6"/>
+                            <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                            <defs>
+                                <linearGradient id="logo-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#7f00ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SUPÉ</span>
+                </a>
+                <p class="brand-slogan">Engenharia de software de altíssimo desempenho. Projetando o futuro através de ecossistemas perfeitamente integrados.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html#hero">Home</a></li>
+                        <li><a href="index.html#dna">DNA Supé</a></li>
+                        <li><a href="index.html#servicos">Soluções</a></li>
+                        <li><a href="index.html#processo">Integração</a></li>
+                        <li><a href="index.html#portfolio">Casos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="#"><i data-lucide="linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i data-lucide="github"></i> GitHub Space</a></li>
+                        <li><a href="#"><i data-lucide="twitter"></i> Twitter / X</a></li>
+                        <li><a href="#"><i data-lucide="youtube"></i> Dev Insights</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Segurança e Termos</h4>
+                    <ul>
+                        <li><a href="privacidade.html">Privacidade</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                        <li><a href="sla.html">SLA de Engenharia</a></li>
+                        <li><a href="status.html">Status do Núcleo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Supé Software Engineering. Todos os direitos reservados. CEO Josafá de Pinho Souza.</p>
+            <p class="tech-signature">Compilado com ⚡ Vanilla HTML/CSS/JS</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+            
+            // --- GRÁFICO DE TELEMETRIA DINÂMICO VIA CANVAS ---
+            const chartCanvas = document.getElementById("latency-chart");
+            const chartCtx = chartCanvas.getContext("2d");
+            
+            // Ajustar tamanho
+            chartCanvas.width = chartCanvas.offsetWidth;
+            chartCanvas.height = chartCanvas.offsetHeight;
+            
+            let dataPoints = Array(20).fill(15); // Iniciar gráfico plano
+            
+            function drawChart() {
+                chartCtx.clearRect(0, 0, chartCanvas.width, chartCanvas.height);
+                
+                const width = chartCanvas.width;
+                const height = chartCanvas.height;
+                const spacing = width / (dataPoints.length - 1);
+                
+                // Desenhar Grade de Fundo
+                chartCtx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+                chartCtx.lineWidth = 1;
+                for (let i = 0; i < 5; i++) {
+                    let y = (height / 4) * i;
+                    chartCtx.beginPath();
+                    chartCtx.moveTo(0, y);
+                    chartCtx.lineTo(width, y);
+                    chartCtx.stroke();
+                }
+                
+                // Desenhar Linha de Latência
+                chartCtx.beginPath();
+                for (let i = 0; i < dataPoints.length; i++) {
+                    // Mapear valor (de 0 a 50 ms) para coordenadas Y (invertidas)
+                    let val = dataPoints[i];
+                    let x = spacing * i;
+                    let y = height - (val / 50) * height * 0.7 - 20; // 0.7 scale fator
+                    
+                    if (i === 0) {
+                        chartCtx.moveTo(x, y);
+                    } else {
+                        chartCtx.lineTo(x, y);
+                    }
+                }
+                
+                // Estilizar a linha com gradiente ciano brilhante
+                const lineGrad = chartCtx.createLinearGradient(0, 0, width, 0);
+                lineGrad.addColorStop(0, "#00f2fe");
+                lineGrad.addColorStop(1, "#7f00ff");
+                chartCtx.strokeStyle = lineGrad;
+                chartCtx.lineWidth = 3;
+                chartCtx.shadowBlur = 10;
+                chartCtx.shadowColor = "rgba(0, 242, 254, 0.5)";
+                chartCtx.stroke();
+                chartCtx.shadowBlur = 0; // Reset
+                
+                // Desenhar área preenchida sob a curva
+                chartCtx.beginPath();
+                chartCtx.moveTo(0, height);
+                for (let i = 0; i < dataPoints.length; i++) {
+                    let val = dataPoints[i];
+                    let x = spacing * i;
+                    let y = height - (val / 50) * height * 0.7 - 20;
+                    chartCtx.lineTo(x, y);
+                }
+                chartCtx.lineTo(width, height);
+                chartCtx.closePath();
+                
+                const fillGrad = chartCtx.createLinearGradient(0, 0, 0, height);
+                fillGrad.addColorStop(0, "rgba(0, 242, 254, 0.15)");
+                fillGrad.addColorStop(1, "rgba(0, 242, 254, 0.0)");
+                chartCtx.fillStyle = fillGrad;
+                chartCtx.fill();
+            }
+            
+            // Loop de Atualização de Telemetria Dinâmica
+            const logBox = document.getElementById("console-log-status");
+            const aiLatencyTxt = document.getElementById("ai-latency");
+            const apiLatencyTxt = document.getElementById("api-latency");
+            const vdbLatencyTxt = document.getElementById("vdb-latency");
+            const cpuLoadTxt = document.getElementById("cpu-load");
+            
+            function updateTelemetry() {
+                // Flutuações aleatórias realistas
+                let newLatency = (Math.random() * 8) + 12; // Latência base de rede
+                dataPoints.shift();
+                dataPoints.push(newLatency);
+                
+                drawChart();
+                
+                // Atualizar textos dos cards com variação
+                let aiLat = (Math.random() * 20) + 130;
+                let apiLat = (Math.random() * 0.8) + 1.8;
+                let vdbLat = (Math.random() * 2) + 7.2;
+                let cpuLd = Math.floor((Math.random() * 5) + 10);
+                
+                aiLatencyTxt.textContent = `Latência: ${aiLat.toFixed(1)}ms`;
+                apiLatencyTxt.textContent = `Latência: ${apiLat.toFixed(1)}ms`;
+                vdbLatencyTxt.textContent = `Latência: ${vdbLat.toFixed(1)}ms`;
+                cpuLoadTxt.textContent = `Carga da CPU: ${cpuLd}%`;
+                
+                // Ocasionalmente, criar logs em tempo real
+                if (Math.random() > 0.6) {
+                    let now = new Date();
+                    let hours = String(now.getHours()).padStart(2, '0');
+                    let mins = String(now.getMinutes()).padStart(2, '0');
+                    let secs = String(now.getSeconds()).padStart(2, '0');
+                    let timeStr = `${hours}:${mins}:${secs}`;
+                    
+                    const logs = [
+                        { text: `[03:48:${secs}] Ping recebido do nó Kubernetes da AWS (US-EAST-1): Latência estável.`, color: "cyan" },
+                        { text: `[03:48:${secs}] Sincronização de Banco de Dados distribuído: Replicação concluída em 0.4ms.`, color: "green" },
+                        { text: `[03:48:${secs}] Requisição processada pelo AetherFlow AI: Cache hit no Vector DB.`, color: "purple" },
+                        { text: `[03:48:${secs}] Telemetria do núcleo: 0 exceções reportadas, memória em 42%.`, color: "" }
+                    ];
+                    
+                    let choice = logs[Math.floor(Math.random() * logs.length)];
+                    let entry = document.createElement("div");
+                    entry.className = `log-entry ${choice.color}`;
+                    entry.textContent = choice.text;
+                    
+                    logBox.appendChild(entry);
+                    logBox.scrollTop = logBox.scrollHeight;
+                }
+            }
+            
+            // Loop a cada 1 segundo
+            setInterval(updateTelemetry, 1000);
+            
+            // Desenhar primeira vez
+            drawChart();
+            
+            // Redimensionamento
+            window.addEventListener("resize", () => {
+                chartCanvas.width = chartCanvas.offsetWidth;
+                chartCanvas.height = chartCanvas.offsetHeight;
+                drawChart();
+            });
+        });
+    </script>
+</body>
+</html>
