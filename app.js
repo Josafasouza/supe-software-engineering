@@ -957,6 +957,268 @@ class LanguageSelector {
     }
 }
 
+// --- CLASSE DE AVISO E PREFERÊNCIAS DE COOKIES (DYNAMIC & MULTILINGUAL) ---
+class CookieConsentManager {
+    constructor(config) {
+        this.config = config;
+        this.consentKey = "supe-cookie-consent";
+        this.isOpen = false;
+        this.bannerEl = null;
+        
+        this.init();
+    }
+    
+    init() {
+        const savedConsent = localStorage.getItem(this.consentKey);
+        if (savedConsent) return; // Consentimento já fornecido
+        
+        // Criar o wrapper do banner no body
+        const wrapper = document.createElement("div");
+        wrapper.className = "cookie-banner-wrapper";
+        wrapper.id = "cookie-consent-banner";
+        document.body.appendChild(wrapper);
+        this.bannerEl = wrapper;
+        
+        this.render();
+        this.bindEvents();
+        
+        // Smooth fade-in
+        setTimeout(() => {
+            const card = this.bannerEl.querySelector(".cookie-card");
+            if (card) card.classList.add("show");
+        }, 100);
+    }
+    
+    render() {
+        if (!this.bannerEl) return;
+        
+        const lang = this.config.currentLanguage;
+        
+        // Dicionário local de cookies nas quatro línguas oficiais do portal
+        const dict = {
+            pt: {
+                title: "Preferências de Cookies",
+                desc: "Utilizamos cookies essenciais e tecnologias semelhantes para otimizar sua experiência, analisar o tráfego cibernético de produção e customizar propostas de arquitetura. Você pode gerenciar suas preferências a qualquer momento.",
+                acceptAll: "Aceitar Todos",
+                reject: "Rejeitar",
+                manage: "Personalizar",
+                save: "Salvar Preferências",
+                essential: "Necessários",
+                essentialDesc: "Essenciais para segurança e operação do núcleo do portal. Não podem ser desativados.",
+                pref: "Preferências",
+                prefDesc: "Salva suas preferências de visualização (como idioma ativo).",
+                analytics: "Analíticos",
+                analyticsDesc: "Permite analisar a telemetria do SRE de produção e latência de rede.",
+                marketing: "Marketing",
+                marketingDesc: "Usado para customizar campanhas e recomendações comerciais da fábrica.",
+                alwaysActive: "Sempre Ativo"
+            },
+            en: {
+                title: "Cookie Preferences",
+                desc: "We use essential cookies and similar technologies to optimize your experience, analyze our production cyber traffic, and customize architecture proposals. You can manage your preferences at any time.",
+                acceptAll: "Accept All",
+                reject: "Reject",
+                manage: "Manage",
+                save: "Save Preferences",
+                essential: "Essential",
+                essentialDesc: "Essential for the portal core's security and operation. Cannot be disabled.",
+                pref: "Preferences",
+                prefDesc: "Saves your viewing settings (such as active language).",
+                analytics: "Analytics",
+                analyticsDesc: "Allows us to analyze production SRE telemetry and network latency.",
+                marketing: "Marketing",
+                marketingDesc: "Used to customize campaigns and business recommendations from the factory.",
+                alwaysActive: "Always Active"
+            },
+            ru: {
+                title: "Настройки куки",
+                desc: "Мы используем необходимые куки и аналогичные технологии для оптимизации вашего опыта, анализа трафика и настройки архитектурных предложений. Вы можете управлять настройками в любое время.",
+                acceptAll: "Принять все",
+                reject: "Отклонить",
+                manage: "Настроить",
+                save: "Сохранить настройки",
+                essential: "Необходимые",
+                essentialDesc: "Необходимы для безопасности и работы ядра портала. Не могут быть отключены.",
+                pref: "Предпочтения",
+                prefDesc: "Сохраняет настройки просмотра (например, активный язык).",
+                analytics: "Аналитика",
+                analyticsDesc: "Позволяет нам анализировать телеметрию SRE и сетевую задержку.",
+                marketing: "Маркетинг",
+                marketingDesc: "Используется для настройки кампаний и коммерческих рекомендаций фабрики.",
+                alwaysActive: "Всегда активно"
+            },
+            es: {
+                title: "Preferencias de Cookies",
+                desc: "Utilizamos cookies esenciales y tecnologías similares para optimizar su experiencia, analizar nuestro tráfico cibernético de producción y personalizar propuestas de arquitectura. Puede gestionar sus preferencias en cualquier momento.",
+                acceptAll: "Aceptar Todo",
+                reject: "Rechazar",
+                manage: "Configurar",
+                save: "Guardar Preferencias",
+                essential: "Esenciales",
+                essentialDesc: "Esenciales para la seguridad y operación del núcleo del portal. No se pueden desactivar.",
+                pref: "Preferencias",
+                prefDesc: "Guarda sus preferencias de visualización (como el idioma activo).",
+                analytics: "Analíticas",
+                analyticsDesc: "Permite analizar la telemetría del SRE de producción y la latencia de red.",
+                marketing: "Marketing",
+                marketingDesc: "Utilizado para personalizar campañas y recomendaciones comerciales de la fábrica.",
+                alwaysActive: "Siempre Activo"
+            }
+        };
+        
+        const t = dict[lang] || dict.pt;
+        
+        this.bannerEl.innerHTML = `
+            <div class="cookie-card glass-panel" role="dialog" aria-modal="true" aria-labelledby="cookie-banner-title">
+                <div class="cookie-header">
+                    <i data-lucide="cookie" class="cookie-header-icon"></i>
+                    <h4 class="cookie-title" id="cookie-banner-title">${t.title}</h4>
+                </div>
+                <p class="cookie-desc">${t.desc}</p>
+                
+                <div class="cookie-actions">
+                    <button class="btn-cookie btn-cookie-primary" id="btn-cookie-accept-all">${t.acceptAll}</button>
+                    <button class="btn-cookie btn-cookie-secondary" id="btn-cookie-reject-all">${t.reject}</button>
+                    <button class="btn-cookie btn-cookie-secondary" id="btn-cookie-customize">${t.manage}</button>
+                </div>
+                
+                <div class="cookie-preferences-drawer" id="cookie-pref-drawer">
+                    <div class="cookie-pref-item">
+                        <div class="cookie-pref-info">
+                            <h5>${t.essential}</h5>
+                            <p>${t.essentialDesc}</p>
+                        </div>
+                        <span class="cookie-pref-badge">${t.alwaysActive}</span>
+                    </div>
+                    
+                    <div class="cookie-pref-item">
+                        <div class="cookie-pref-info">
+                            <h5>${t.pref}</h5>
+                            <p>${t.prefDesc}</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="cookie-pref-toggle-pref" checked disabled>
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="cookie-pref-item">
+                        <div class="cookie-pref-info">
+                            <h5>${t.analytics}</h5>
+                            <p>${t.analyticsDesc}</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="cookie-pref-toggle-analytics" checked>
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="cookie-pref-item">
+                        <div class="cookie-pref-info">
+                            <h5>${t.marketing}</h5>
+                            <p>${t.marketingDesc}</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="cookie-pref-toggle-marketing">
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <button class="btn-cookie btn-cookie-primary" id="btn-cookie-save-prefs" style="width: 100%; margin-top: 0.5rem;">
+                        ${t.save}
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    }
+    
+    bindEvents() {
+        if (!this.bannerEl) return;
+        
+        const acceptAllBtn = this.bannerEl.querySelector("#btn-cookie-accept-all");
+        const rejectBtn = this.bannerEl.querySelector("#btn-cookie-reject-all");
+        const customizeBtn = this.bannerEl.querySelector("#btn-cookie-customize");
+        const savePrefsBtn = this.bannerEl.querySelector("#btn-cookie-save-prefs");
+        const drawer = this.bannerEl.querySelector("#cookie-pref-drawer");
+        
+        acceptAllBtn.addEventListener("click", () => {
+            this.saveConsent({
+                essential: true,
+                preferences: true,
+                analytics: true,
+                marketing: true
+            });
+        });
+        
+        rejectBtn.addEventListener("click", () => {
+            this.saveConsent({
+                essential: true,
+                preferences: true,
+                analytics: false,
+                marketing: false
+            });
+        });
+        
+        customizeBtn.addEventListener("click", () => {
+            this.isOpen = !this.isOpen;
+            drawer.classList.toggle("open", this.isOpen);
+            
+            // Trocar foco para o primeiro switch analítico se aberto
+            if (this.isOpen) {
+                setTimeout(() => {
+                    const analyticsToggle = this.bannerEl.querySelector("#cookie-pref-toggle-analytics");
+                    if (analyticsToggle) analyticsToggle.focus();
+                }, 300);
+            }
+        });
+        
+        savePrefsBtn.addEventListener("click", () => {
+            const hasAnalytics = this.bannerEl.querySelector("#cookie-pref-toggle-analytics").checked;
+            const hasMarketing = this.bannerEl.querySelector("#cookie-pref-toggle-marketing").checked;
+            
+            this.saveConsent({
+                essential: true,
+                preferences: true,
+                analytics: hasAnalytics,
+                marketing: hasMarketing
+            });
+        });
+    }
+    
+    saveConsent(settings) {
+        localStorage.setItem(this.consentKey, JSON.stringify(settings));
+        
+        // Fade-out suave do card
+        const card = this.bannerEl.querySelector(".cookie-card");
+        if (card) {
+            card.classList.remove("show");
+            setTimeout(() => {
+                this.bannerEl.remove();
+                this.bannerEl = null;
+            }, 500);
+        }
+    }
+    
+    // Método para permitir a re-tradução externa ao alternar idioma
+    translate() {
+        if (this.bannerEl) {
+            this.render();
+            this.bindEvents();
+            // Manter a gaveta aberta se estivesse aberta
+            if (this.isOpen) {
+                const drawer = this.bannerEl.querySelector("#cookie-pref-drawer");
+                if (drawer) drawer.classList.add("open");
+            }
+            const card = this.bannerEl.querySelector(".cookie-card");
+            if (card) card.classList.add("show");
+        }
+    }
+}
+
 // --- Função Global para Tradução da Página baseada nos Seletores CSS ---
 function translatePage(lang) {
     const dict = translations[lang];
@@ -1026,6 +1288,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const langSelector = new LanguageSelector("lang-selector-container", i18nConfig, (selectedLang) => {
         translatePage(selectedLang);
         
+        // Traduzir o banner de cookies em tempo real se estiver aberto!
+        if (window.cookieConsentManager) {
+            window.cookieConsentManager.translate();
+        }
+        
         // Se estivermos na subpágina de Status, forçar redesenho do canvas imediatamente
         const chartCanvas = document.getElementById("latency-chart");
         if (chartCanvas && typeof drawChart === "function") {
@@ -1035,6 +1302,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Aplicar tradução inicial salva ou padrão
     translatePage(i18nConfig.currentLanguage);
+    
+    // --- Inicialização do Consentimento de Cookies (Dynamic & DRY) ---
+    window.cookieConsentManager = new CookieConsentManager(i18nConfig);
     
     // --- 1. MENU MOBILE ---
     const mobileToggle = document.getElementById("mobile-toggle");
