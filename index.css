@@ -1832,10 +1832,14 @@ body {
         gap: 1rem;
     }
     
+    .integration-display {
+        padding: 2rem 1.2rem;
+    }
     .integration-map {
         height: 400px;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Alinha à esquerda para liberar espaço de texto à direita */
+        padding-left: 1.5rem; /* Afastamento seguro da borda esquerda */
         gap: 1.5rem;
     }
     .integration-node {
@@ -1856,6 +1860,7 @@ body {
         width: 2px;
         height: 40px;
         flex-grow: 0;
+        margin-left: 29px; /* Centraliza a linha de 2px sob o centro do nó de 60px (30px - 1px) */
     }
     .pulse-particle {
         top: -50px;
