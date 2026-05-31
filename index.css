@@ -1836,30 +1836,36 @@ body {
         padding: 2rem 1.2rem;
     }
     .integration-map {
-        height: 400px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
         flex-direction: column;
         align-items: flex-start; /* Alinha à esquerda para liberar espaço de texto à direita */
         padding-left: 1.5rem; /* Afastamento seguro da borda esquerda */
-        gap: 1.5rem;
+        gap: 1rem;
     }
     .integration-node {
         width: 60px;
         height: 60px;
+        flex-shrink: 0;
     }
     .node-inner {
         width: 46px;
         height: 46px;
     }
     .node-title {
-        left: 80px;
+        left: 72px;
         bottom: auto;
         top: 50%;
         transform: translateY(-50%);
+        font-size: 0.8rem;
+        white-space: nowrap;
     }
     .integration-line {
         width: 2px;
-        height: 40px;
+        height: 30px;
         flex-grow: 0;
+        flex-shrink: 0;
         margin-left: 29px; /* Centraliza a linha de 2px sob o centro do nó de 60px (30px - 1px) */
     }
     .pulse-particle {
