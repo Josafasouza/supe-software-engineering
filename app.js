@@ -1473,7 +1473,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let directionX = (Math.random() * 0.8) - 0.4;
                 let directionY = (Math.random() * 0.8) - 0.4;
                 
-                let color = i % 2 === 0 ? "#00f2fe" : "#7f00ff";
+                let color = i % 2 === 0 ? "#0098b0" : "#6c19d4";
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
             }
         }
@@ -1490,7 +1490,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     if (distance < maxDist) {
                         let alpha = 1 - (distance / maxDist);
-                        ctx.strokeStyle = `rgba(0, 242, 254, ${alpha * 0.12})`;
+                        ctx.strokeStyle = `rgba(0, 152, 176, ${alpha * 0.18})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -1506,7 +1506,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     
                     if (distance < mouse.radius) {
                         let alpha = 1 - (distance / mouse.radius);
-                        ctx.strokeStyle = `rgba(127, 0, 255, ${alpha * 0.15})`;
+                        ctx.strokeStyle = `rgba(108, 25, 212, ${alpha * 0.22})`;
                         ctx.lineWidth = 1.2;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
