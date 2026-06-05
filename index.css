@@ -315,28 +315,28 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.6rem 1.2rem;
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 0.6rem 1.3rem;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
     text-decoration: none;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(0, 242, 254, 0.3);
-    border-radius: 6px;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(108, 25, 212, 0.25);
     transition: var(--transition-smooth);
 }
 
 .btn-cta-nav:hover {
-    border-color: var(--accent-cyan);
-    background: rgba(0, 242, 254, 0.05);
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
-    transform: translateY(-1px);
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 18px rgba(108, 25, 212, 0.35);
+    opacity: 0.95;
 }
 
 .btn-cta-nav svg {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     transition: var(--transition-fast);
 }
 
