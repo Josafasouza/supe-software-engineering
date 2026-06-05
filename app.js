@@ -76,6 +76,17 @@ const translations = {
         ".processo-section h2.section-title": "Nossa Engenharia <span class=\"gradient-text-alt\">na Prática</span>",
         ".processo-section p.section-desc": "Veja como integramos estratégia, desenvolvimento, inteligência artificial e computação em nuvem para criar ecossistemas digitais indestrutíveis.",
         
+        // Regras de Ouro
+        "#rules-badge-text": "QUALIDADE DE CÓDIGO",
+        "#rules-card-title": "Nossas Regras de Ouro",
+        "#rules-card-desc": "Aplicamos princípios rígidos de design de software para construir sistemas altamente manuteníveis, modulares e imunes a falhas.",
+        "#tab-label-composition": "Composição sobre Herança",
+        "#tab-label-guards": "Guard Clauses",
+        "#visual-panel-title": "Funcionamento Dinâmico",
+        "#code-panel-title": "Refatoração Didática",
+        "#code-toggle-before": "Antes",
+        "#code-toggle-after": "Depois",
+        
         // Portfólio
         ".portfolio-section .section-tag span": "Showcase Tecnológico",
         ".portfolio-section h2.section-title": "Nossas <span class=\"gradient-text\">Obras de Engenharia</span>",
@@ -219,6 +230,17 @@ const translations = {
         ".processo-section .section-tag span": "The Integration Engine",
         ".processo-section h2.section-title": "Our Engineering <span class=\"gradient-text-alt\">in Practice</span>",
         ".processo-section p.section-desc": "See how we integrate strategy, development, artificial intelligence, and cloud computing to create indestructible digital ecosystems.",
+        
+        // Regras de Ouro
+        "#rules-badge-text": "CODE QUALITY",
+        "#rules-card-title": "Our Golden Rules",
+        "#rules-card-desc": "We apply strict software design principles to build highly maintainable, modular, and fault-tolerant systems.",
+        "#tab-label-composition": "Composition over Inheritance",
+        "#tab-label-guards": "Guard Clauses",
+        "#visual-panel-title": "Dynamic Simulator",
+        "#code-panel-title": "Didactic Refactoring",
+        "#code-toggle-before": "Before",
+        "#code-toggle-after": "After",
         
         // Portfólio
         ".portfolio-section .section-tag span": "Tech Showcase",
@@ -364,6 +386,17 @@ const translations = {
         ".processo-section h2.section-title": "Наш Инжиниринг <span class=\"gradient-text-alt\">на Практике</span>",
         ".processo-section p.section-desc": "Узнайте, как мы объединяем стратегию, разработку, искусственный интеллект и облачные вычисления для создания неуязвимых цифровых систем.",
         
+        // Regras de Ouro
+        "#rules-badge-text": "КАЧЕСТВО КОДА",
+        "#rules-card-title": "Наши Золотые Правила",
+        "#rules-card-desc": "Мы применяем строгие принципы проектирования ПО для создания легко поддерживаемых, модульных и отказоустойчивых систем.",
+        "#tab-label-composition": "Композиция вместо Наследования",
+        "#tab-label-guards": "Guard Clauses",
+        "#visual-panel-title": "Динамический симулятор",
+        "#code-panel-title": "Дидактический рефакторинг",
+        "#code-toggle-before": "До",
+        "#code-toggle-after": "После",
+        
         // Portfólio
         ".portfolio-section .section-tag span": "Технологическая Витрина",
         ".portfolio-section h2.section-title": "Наши <span class=\"gradient-text\">Шедевры Инженерии</span>",
@@ -507,6 +540,17 @@ const translations = {
         ".processo-section .section-tag span": "El Motor de Integración",
         ".processo-section h2.section-title": "Nuestra Ingeniería <span class=\"gradient-text-alt\">en la Práctica</span>",
         ".processo-section p.section-desc": "Vea cómo integramos estrategia, desarrollo, inteligencia artificial y computación en la nube para crear ecosistemas digitales indestructibles.",
+        
+        // Regras de Ouro
+        "#rules-badge-text": "CALIDAD DE CÓDIGO",
+        "#rules-card-title": "Nuestras Reglas de Oro",
+        "#rules-card-desc": "Aplicamos principios estrictos de diseño de software para construir sistemas altamente mantenibles, modulares y tolerantes a fallos.",
+        "#tab-label-composition": "Composición sobre Herencia",
+        "#tab-label-guards": "Guard Clauses",
+        "#visual-panel-title": "Funcionamiento Dinámico",
+        "#code-panel-title": "Refactorización Didáctica",
+        "#code-toggle-before": "Antes",
+        "#code-toggle-after": "Después",
         
         // Portfólio
         ".portfolio-section .section-tag span": "Vitrina Tecnológica",
@@ -1303,6 +1347,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof activeProjectId !== "undefined" && activeProjectId) {
             openProjectModal(activeProjectId);
         }
+
+        // Se o simulador de Regras de Ouro estiver ativo, atualizar os textos explicativos
+        if (typeof activeRuleId !== "undefined" && activeRuleId) {
+            switchGoldenRule(activeRuleId);
+        }
     });
     
     // Aplicar tradução inicial salva ou padrão
@@ -1811,6 +1860,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Inicializar o painel de Regras de Ouro
+    switchGoldenRule('composition');
 });
 
 // ==========================================================================
@@ -2315,3 +2367,322 @@ function renderScreenMockup() {
 window.openProjectModal = openProjectModal;
 window.closeProjectModal = closeProjectModal;
 window.switchModalTab = switchModalTab;
+
+// --- GOLDEN RULES INTERACTIVE CARD LOGIC ---
+let activeRuleId = 'composition';
+let activeCodeState = 'before';
+
+const goldenRulesData = {
+    "composition": {
+        "file": "RobotDog.cs",
+        "explanation": {
+            "pt": "A composição permite acoplar comportamentos modulares injetando dependências, evitando a fragilidade de hierarquias rígidas de herança (onde subclasses herdam comportamentos indesejados).",
+            "en": "Composition allows coupling modular behaviors by injecting dependencies, avoiding the fragility of rigid inheritance hierarchies (where subclasses inherit unwanted behaviors).",
+            "ru": "Композиция позволяет связывать модульные поведения путем внедрения зависимостей, избегая хрупкости жестких иерархий наследования (где подклассы наследуют нежелательное поведение).",
+            "es": "La composición permite acoplar comportamientos modulares inyectando dependencias, evitando la fragilidad de jerarquías rígidas de herencia (donde las subclases heredan comportamientos no deseados)."
+        },
+        "code": {
+            "before": {
+                "pt": `<span class="comment">// ❌ Herança rígida: Robô herdando de Animal real</span>
+<span class="keyword">public class</span> <span class="type">RoboCachorro</span> : <span class="type">CachorroDomestico</span> {
+    <span class="comment">// Herda métodos impróprios como Comer() e Respirar()</span>
+    <span class="comment">// que falham ou quebram o fluxo físico de um robô.</span>
+    <span class="keyword">public override void</span> Comer() {
+        <span class="keyword">throw new</span> <span class="type">InvalidOperationException</span>(<span class="string">"Robôs não comem!"</span>);
+    }
+}`,
+                "en": `<span class="comment">// ❌ Rigid Inheritance: Robot inheriting from real Animal</span>
+<span class="keyword">public class</span> <span class="type">RobotDog</span> : <span class="type">DomesticDog</span> {
+    <span class="comment">// Inherits improper methods like Eat() and Breathe()</span>
+    <span class="comment">// which fail or break the physical flow of a robot.</span>
+    <span class="keyword">public override void</span> Eat() {
+        <span class="keyword">throw new</span> <span class="type">InvalidOperationException</span>(<span class="string">"Robots do not eat!"</span>);
+    }
+}`,
+                "ru": `<span class="comment">// ❌ Жесткое наследование: Робот наследуется от реального Животного</span>
+<span class="keyword">public class</span> <span class="type">RobotDog</span> : <span class="type">DomesticDog</span> {
+    <span class="comment">// Наследует неподходящие методы вроде Eat() и Breathe(),</span>
+    <span class="comment">// которые вызывают ошибки или нарушают логику робота.</span>
+    <span class="keyword">public override void</span> Eat() {
+        <span class="keyword">throw new</span> <span class="type">InvalidOperationException</span>(<span class="string">"Роботы не едят!"</span>);
+    }
+}`,
+                "es": `<span class="comment">// ❌ Herencia rígida: El robot hereda del Animal real</span>
+<span class="keyword">public class</span> <span class="type">RobotDog</span> : <span class="type">DomesticDog</span> {
+    <span class="comment">// Hereda métodos impropios como Comer() y Respirar()</span>
+    <span class="comment">// que fallan o rompen el flujo físico de un robot.</span>
+    <span class="keyword">public override void</span> Comer() {
+        <span class="keyword">throw new</span> <span class="type">InvalidOperationException</span>(<span class="string">"¡Los robots no comen!"</span>);
+    }
+}`
+            },
+            "after": {
+                "pt": `<span class="comment">//  Composição flexível: Comportamento injetado</span>
+<span class="keyword">public class</span> <span class="type">RoboCachorro</span> {
+    <span class="keyword">private readonly</span> <span class="type">IMovimento</span> _movimento;
+    <span class="keyword">private readonly</span> <span class="type">IAltoFalante</span> _som;
+    
+    <span class="comment">// Injeção de Dependência para acoplamento flexível</span>
+    <span class="keyword">public</span> RoboCachorro(<span class="type">IMovimento</span> mov, <span class="type">IAltoFalante</span> som) {
+        _movimento = mov;
+        _som = som;
+    }
+    <span class="keyword">public void</span> Executar() {
+        _movimento.Andar(); <span class="comment">// Comportamento composto modular</span>
+    }
+}`,
+                "en": `<span class="comment">//  Flexible Composition: Injected behaviors</span>
+<span class="keyword">public class</span> <span class="type">RobotDog</span> {
+    <span class="keyword">private readonly</span> <span class="type">IMovement</span> _movement;
+    <span class="keyword">private readonly</span> <span class="type">ISpeaker</span> _sound;
+    
+    <span class="comment">// Dependency Injection for loose coupling</span>
+    <span class="keyword">public</span> RobotDog(<span class="type">IMovement</span> mov, <span class="type">ISpeaker</span> som) {
+        _movement = mov;
+        _sound = som;
+    }
+    <span class="keyword">public void</span> Run() {
+        _movement.Walk(); <span class="comment">// Modular composed behavior</span>
+    }
+}`,
+                "ru": `<span class="comment">//  Гибкая композиция: Внедренное поведение</span>
+<span class="keyword">public class</span> <span class="type">RobotDog</span> {
+    <span class="keyword">private readonly</span> <span class="type">IMovement</span> _movement;
+    <span class="keyword">private readonly</span> <span class="type">ISpeaker</span> _sound;
+    
+    <span class="comment">// Внедрение зависимостей для слабой связи</span>
+    <span class="keyword">public</span> RobotDog(<span class="type">IMovement</span> mov, <span class="type">ISpeaker</span> som) {
+        _movement = mov;
+        _sound = som;
+    }
+    <span class="keyword">public void</span> Run() {
+        _movement.Walk(); <span class="comment">// Модульное составное поведение</span>
+    }
+}`,
+                "es": `<span class="comment">//  Composición flexible: Comportamientos inyectados</span>
+<span class="keyword">public class</span> <span class="type">RobotDog</span> {
+    <span class="keyword">private readonly</span> <span class="type">IMovement</span> _movement;
+    <span class="keyword">private readonly</span> <span class="type">ISpeaker</span> _sound;
+    
+    <span class="comment">// Inyección de dependencias para acoplamiento flexible</span>
+    <span class="keyword">public</span> RobotDog(<span class="type">IMovement</span> mov, <span class="type">ISpeaker</span> som) {
+        _movement = mov;
+        _sound = som;
+    }
+    <span class="keyword">public void</span> Ejecutar() {
+        _movement.Caminar(); <span class="comment">// Comportamiento compuesto modular</span>
+    }
+}`
+            }
+        }
+    },
+    "guards": {
+        "file": "OrderProcessor.cs",
+        "explanation": {
+            "pt": "As Cláusulas de Guarda verificam condições inválidas imediatamente e retornam/lançam exceções mais cedo. Isso limpa a indentação do código, elimina blocos 'if-else' aninhados e melhora a legibilidade do fluxo principal.",
+            "en": "Guard Clauses check invalid conditions immediately and return/throw exceptions early. This flattens code indentation, eliminates nested 'if-else' blocks, and improves main flow readability.",
+            "ru": "Guard Clauses проверяют некорректные условия сразу и вызывают ранний возврат или исключение. Это уплотняет отступы кода, устраняет вложенные блоки 'if-else' и улучшает читаемость.",
+            "es": "Las Cláusulas de Guarda verifican condiciones inválidas de inmediato y devuelven/lanzan excepciones antes. Esto aplana la sangría del código, elimina bloques 'if-else' anidados y mejora la legibilidad."
+        },
+        "code": {
+            "before": {
+                "pt": `<span class="comment">// ❌ Aninhamento excessivo: Código em pirâmide</span>
+<span class="keyword">public void</span> Processar(<span class="type">Pedido</span> pedido) {
+    <span class="keyword">if</span> (pedido != <span class="keyword">null</span>) {
+        <span class="keyword">if</span> (pedido.Itens.Count > <span class="string">0</span>) {
+            <span class="keyword">if</span> (pedido.Cliente.Ativo) {
+                <span class="comment">// Caminho feliz espremido na direita</span>
+                ExecutarProcessamento(pedido);
+            }
+        }
+    }
+}`,
+                "en": `<span class="comment">// ❌ Excessive Nesting: Pyramid of Doom</span>
+<span class="keyword">public void</span> Process(<span class="type">Order</span> order) {
+    <span class="keyword">if</span> (order != <span class="keyword">null</span>) {
+        <span class="keyword">if</span> (order.Items.Count > <span class="string">0</span>) {
+            <span class="keyword">if</span> (order.Client.IsActive) {
+                <span class="comment">// Happy path squeezed on the far right</span>
+                ExecuteProcessing(order);
+            }
+        }
+    }
+}`,
+                "ru": `<span class="comment">// ❌ Чрезмерная вложенность: Код-пирамида</span>
+<span class="keyword">public void</span> Process(<span class="type">Order</span> order) {
+    <span class="keyword">if</span> (order != <span class="keyword">null</span>) {
+        <span class="keyword">if</span> (order.Items.Count > <span class="string">0</span>) {
+            <span class="keyword">if</span> (order.Client.IsActive) {
+                <span class="comment">// Основной поток зажат глубоко справа</span>
+                ExecuteProcessing(order);
+            }
+        }
+    }
+}`,
+                "es": `<span class="comment">// ❌ Anidamiento excesivo: Código en pirámide</span>
+<span class="keyword">public void</span> Procesar(<span class="type">Pedido</span> pedido) {
+    <span class="keyword">if</span> (pedido != <span class="keyword">null</span>) {
+        <span class="keyword">if</span> (pedido.Articulos.Count > <span class="string">0</span>) {
+            <span class="keyword">if</span> (pedido.Cliente.Activo) {
+                <span class="comment">// Camino feliz exprimido en la derecha</span>
+                EjecutarProcesamiento(pedido);
+            }
+        }
+    }
+}`
+            },
+            "after": {
+                "pt": `<span class="comment">//  Guards: Retorno antecipado e fluxo linear</span>
+<span class="keyword">public void</span> Processar(<span class="type">Pedido</span> pedido) {
+    <span class="keyword">if</span> (pedido == <span class="keyword">null</span>) <span class="keyword">throw new</span> <span class="type">ArgumentException</span>();
+    <span class="keyword">if</span> (pedido.Itens.Count == <span class="string">0</span>) <span class="keyword">return</span>;
+    <span class="keyword">if</span> (!pedido.Cliente.Ativo) <span class="keyword">return</span>; <span class="comment">// Retorna cedo</span>
+    
+    <span class="comment">// Caminho feliz sem recuos e altamente legível</span>
+    ExecutarProcessamento(pedido);
+}`,
+                "en": `<span class="comment">//  Guards: Early return and flat flow</span>
+<span class="keyword">public void</span> Process(<span class="type">Order</span> order) {
+    <span class="keyword">if</span> (order == <span class="keyword">null</span>) <span class="keyword">throw new</span> <span class="type">ArgumentException</span>();
+    <span class="keyword">if</span> (order.Items.Count == <span class="string">0</span>) <span class="keyword">return</span>;
+    <span class="keyword">if</span> (!order.Client.IsActive) <span class="keyword">return</span>; <span class="comment">// Early exit</span>
+    
+    <span class="comment">// Clean, highly readable happy path without nesting</span>
+    ExecuteProcessing(order);
+}`,
+                "ru": `<span class="comment">//  Guards: Ранний возврат и плоский поток</span>
+<span class="keyword">public void</span> Process(<span class="type">Order</span> order) {
+    <span class="keyword">if</span> (order == <span class="keyword">null</span>) <span class="keyword">throw new</span> <span class="type">ArgumentException</span>();
+    <span class="keyword">if</span> (order.Items.Count == <span class="string">0</span>) <span class="keyword">return</span>;
+    <span class="keyword">if</span> (!order.Client.IsActive) <span class="keyword">return</span>; <span class="comment">// Выход раньше</span>
+    
+    <span class="comment">// Читаемый основной поток без отступов и лесенки</span>
+    ExecuteProcessing(order);
+}`,
+                "es": `<span class="comment">//  Guards: Retorno anticipado y flujo lineal</span>
+<span class="keyword">public void</span> Procesar(<span class="type">Pedido</span> pedido) {
+    <span class="keyword">if</span> (pedido == <span class="keyword">null</span>) <span class="keyword">throw new</span> <span class="type">ArgumentException</span>();
+    <span class="keyword">if</span> (pedido.Articulos.Count == <span class="string">0</span>) <span class="keyword">return</span>;
+    <span class="keyword">if</span> (!pedido.Cliente.Activo) <span class="keyword">return</span>; <span class="comment">// Retorna temprano</span>
+    
+    <span class="comment">// Camino feliz sin sangrías complejas y altamente legible</span>
+    EjecutarProcesamiento(pedido);
+}`
+            }
+        }
+    }
+};
+
+function switchGoldenRule(ruleId) {
+    activeRuleId = ruleId;
+    
+    // Update active tab button style
+    const tabBtns = document.querySelectorAll(".rules-tab-btn");
+    tabBtns.forEach(btn => btn.classList.remove("active"));
+    
+    const activeBtn = document.getElementById(`rule-btn-${ruleId}`);
+    if (activeBtn) activeBtn.classList.add("active");
+    
+    // Render visual simulator and code
+    renderGoldenRuleVisual();
+    renderGoldenRuleCode();
+}
+
+function switchCodeCompare(state) {
+    activeCodeState = state;
+    
+    // Update active code toggle button style
+    const toggleBtns = document.querySelectorAll(".code-toggle-btn");
+    toggleBtns.forEach(btn => btn.classList.remove("active"));
+    
+    const activeBtn = document.getElementById(`code-toggle-${state}`);
+    if (activeBtn) activeBtn.classList.add("active");
+    
+    // Redraw code
+    renderGoldenRuleCode();
+}
+
+function renderGoldenRuleVisual() {
+    const visualBox = document.getElementById("rules-visual-simulator");
+    if (!visualBox) return;
+    
+    if (activeRuleId === 'composition') {
+        const lang = i18nConfig.currentLanguage || 'pt';
+        const badTitle = { "pt": "Herança Rígida (Frágil)", "en": "Rigid Inheritance", "ru": "Жесткое наследование", "es": "Herencia Rígida" }[lang];
+        const goodTitle = { "pt": "Composição (Flexível)", "en": "Composition (Flexible)", "ru": "Композиция", "es": "Composición" }[lang];
+        
+        visualBox.innerHTML = `
+            <div class="composition-sim-container">
+                <div class="composition-sim-left">
+                    <span class="sim-side-title">${badTitle}</span>
+                    <div class="inheritance-chain">
+                        <div class="chain-item">Animal</div>
+                        <div class="chain-arrow"></div>
+                        <div class="chain-item">Cachorro</div>
+                        <div class="chain-arrow"></div>
+                        <div class="chain-item" style="border-color:#f35588; color:#f35588; background:rgba(243,85,136,0.1);">RoboCachorro</div>
+                    </div>
+                </div>
+                <div class="composition-sim-right">
+                    <span class="sim-side-title">${goodTitle}</span>
+                    <div class="composition-core">RobotDog</div>
+                    <div class="composition-modules-grid">
+                        <div class="comp-module-item mod-walk" style="--start-x: -95px; --start-y: -95px; --dock-x: -80px; --dock-y: -40px;">WalkBehavior</div>
+                        <div class="comp-module-item mod-bark" style="--start-x: 95px; --start-y: -95px; --dock-x: 80px; --dock-y: -40px;">BarkBehavior</div>
+                        <div class="comp-module-item mod-battery" style="--start-x: 0px; --start-y: 105px; --dock-x: 0px; --dock-y: 65px;">PowerSource</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else if (activeRuleId === 'guards') {
+        const lang = i18nConfig.currentLanguage || 'pt';
+        const badTitle = { "pt": "Aninhado (Instável)", "en": "Nested If-Else", "ru": "Вложенный If-Else", "es": "Anidado" }[lang];
+        const goodTitle = { "pt": "Early Return (Robusto)", "en": "Early Return", "ru": "Early Return", "es": "Early Return" }[lang];
+
+        visualBox.innerHTML = `
+            <div class="guards-sim-container">
+                <div class="guards-sim-left">
+                    <span class="sim-side-title">${badTitle}</span>
+                    <div class="nested-maze">
+                        <div class="maze-branch b-1"></div>
+                        <div class="maze-branch b-2"></div>
+                        <div class="maze-branch b-3"></div>
+                        <div class="nested-particle"></div>
+                    </div>
+                </div>
+                <div class="guards-sim-right">
+                    <span class="sim-side-title">${goodTitle}</span>
+                    <div class="guards-pipeline">
+                        <div class="guards-vertical-path">
+                            <div class="guard-clause-bar g-1"></div>
+                            <div class="guard-clause-bar g-2"></div>
+                            <div class="guard-success-node"></div>
+                            <div class="guards-particle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+function renderGoldenRuleCode() {
+    const lang = i18nConfig.currentLanguage || 'pt';
+    const rule = goldenRulesData[activeRuleId];
+    if (!rule) return;
+    
+    // Set file name
+    document.getElementById("editor-file-name").textContent = rule.file;
+    
+    // Set code body
+    const codeContent = rule.code[activeCodeState][lang];
+    document.getElementById("editor-code-content").innerHTML = codeContent;
+    
+    // Set explanation
+    const explanationText = rule.explanation[lang];
+    document.getElementById("rule-explanation-text").textContent = explanationText;
+}
+
+// Mount to window object for global availability
+window.switchGoldenRule = switchGoldenRule;
+window.switchCodeCompare = switchCodeCompare;

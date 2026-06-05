@@ -354,6 +354,68 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Card de Regras de Ouro de Arquitetura -->
+                <div id="golden-rules-card" class="glass-panel" data-aos="fade-up">
+                    <div class="rules-card-header">
+                        <div class="rules-badge">
+                            <i data-lucide="award"></i>
+                            <span id="rules-badge-text">QUALIDADE DE CÓDIGO</span>
+                        </div>
+                        <h3 id="rules-card-title">Nossa Regra de Ouro</h3>
+                        <p id="rules-card-desc">Aplicamos princípios rígidos de design de software para construir sistemas altamente manuteníveis, modulares e imunes a falhas.</p>
+                    </div>
+                    
+                    <div class="rules-tabs">
+                        <button class="rules-tab-btn active" onclick="switchGoldenRule('composition')" id="rule-btn-composition">
+                            <i data-lucide="blocks"></i>
+                            <span id="tab-label-composition">Composição sobre Herança</span>
+                        </button>
+                        <button class="rules-tab-btn" onclick="switchGoldenRule('guards')" id="rule-btn-guards">
+                            <i data-lucide="shield-alert"></i>
+                            <span id="tab-label-guards">Guard Clauses</span>
+                        </button>
+                    </div>
+                    
+                    <div class="rules-body">
+                        <!-- Painel 1: Simulação Gráfica Animada -->
+                        <div class="rules-visual-col">
+                            <h4 class="rules-panel-title">
+                                <i data-lucide="activity"></i>
+                                <span id="visual-panel-title">Funcionamento Dinâmico</span>
+                            </h4>
+                            <div class="visual-simulator-box" id="rules-visual-simulator">
+                                <!-- Injetado via JS dependendo da aba ativa -->
+                            </div>
+                        </div>
+                        
+                        <!-- Painel 2: Código Didático Comparativo -->
+                        <div class="rules-code-col">
+                            <div class="code-panel-header">
+                                <h4 class="rules-panel-title">
+                                    <i data-lucide="code-2"></i>
+                                    <span id="code-panel-title">Refatoração Didática</span>
+                                </h4>
+                                <div class="code-toggle-buttons">
+                                    <button class="code-toggle-btn active" onclick="switchCodeCompare('before')" id="code-toggle-before">Antes</button>
+                                    <button class="code-toggle-btn" onclick="switchCodeCompare('after')" id="code-toggle-after">Depois</button>
+                                </div>
+                            </div>
+                            <div class="code-editor-mockup">
+                                <div class="editor-header">
+                                    <div class="editor-dot red"></div>
+                                    <div class="editor-dot yellow"></div>
+                                    <div class="editor-dot green"></div>
+                                    <span class="editor-file-title" id="editor-file-name">example.cs</span>
+                                </div>
+                                <pre class="editor-code"><code id="editor-code-content">// Código demonstrativo</code></pre>
+                            </div>
+                            <div class="rule-explanation-box">
+                                <p id="rule-explanation-text">Explicação didática da regra e seus benefícios corporativos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
