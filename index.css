@@ -1910,6 +1910,33 @@ body {
         gap: 1.5rem;
         text-align: center;
     }
+    .stat-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        gap: 0.5rem;
+    }
+    .stat-experience {
+        bottom: 1.5rem;
+        left: 1.5rem;
+    }
+    .stat-satisfaction {
+        top: 1.5rem;
+        left: 1.5rem;
+    }
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    .stat-label {
+        font-size: 0.65rem;
+        letter-spacing: 0.02em;
+    }
+    .stat-badge span {
+        font-size: 0.75rem;
+    }
+    .stat-badge svg {
+        width: 14px;
+        height: 14px;
+    }
 }
 
 /* --- Botão Flutuante do WhatsApp --- */
