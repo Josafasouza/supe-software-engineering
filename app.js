@@ -1298,6 +1298,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (chartCanvas && typeof drawChart === "function") {
             drawChart();
         }
+
+        // Se o modal do portfólio estiver aberto, atualizar o conteúdo no novo idioma
+        if (typeof activeProjectId !== "undefined" && activeProjectId) {
+            openProjectModal(activeProjectId);
+        }
     });
     
     // Aplicar tradução inicial salva ou padrão
@@ -1787,4 +1792,526 @@ document.addEventListener("DOMContentLoaded", () => {
             card.style.setProperty("--y", `${y}px`);
         });
     });
+
+    // --- 8. FECHAMENTO DO MODAL DE PORTFÓLIO (TECLADO E CLIQUE FORA) ---
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            const modal = document.getElementById("portfolio-modal");
+            if (modal && modal.classList.contains("active")) {
+                closeProjectModal();
+            }
+        }
+    });
+
+    const modalOverlay = document.getElementById("portfolio-modal");
+    if (modalOverlay) {
+        modalOverlay.addEventListener("click", (e) => {
+            if (e.target === modalOverlay) {
+                closeProjectModal();
+            }
+        });
+    }
 });
+
+// ==========================================================================
+// PORTFOLIO DETAILS MODAL LOGIC (FLUXOS E TELAS)
+// ==========================================================================
+let activeProjectId = null;
+let activeTabId = null;
+
+const projectDetails = {
+    "aetherflow": {
+        "tag": {
+            "pt": "INTELIGÊNCIA ARTIFICIAL",
+            "en": "ARTIFICIAL INTELLIGENCE",
+            "ru": "ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ",
+            "es": "INTELIGENCIA ARTIFICIAL"
+        },
+        "title": {
+            "pt": "AetherFlow AI Enterprise",
+            "en": "AetherFlow AI Enterprise",
+            "ru": "AetherFlow AI Enterprise",
+            "es": "AetherFlow AI Enterprise"
+        },
+        "subtitle": {
+            "pt": "Orquestrador inteligente de fluxos organizacionais integrado com IA Generativa privada e RAG para o setor financeiro.",
+            "en": "Intelligent organizational workflow orchestrator integrated with private Generative AI and RAG for the financial sector.",
+            "ru": "Интеллектуальный оркестратор организационных процессов, интегрированный с частным генеративным ИИ и RAG для финансового сектора.",
+            "es": "Orquestador inteligente de flujos organizacionales integrado con IA Generativa privada y RAG para el sector financiero."
+        },
+        "stack": "Next.js / NestJS / Python / LangChain / pgvector / AWS",
+        "impact": {
+            "pt": "99.9% Disponibilidade | Redução de 40% no tempo de análise",
+            "en": "99.9% Availability | 40% reduction in analysis time",
+            "ru": "99.9% Доступность | Сокращение времени анализа на 40%",
+            "es": "99.9% Disponibilidad | Reducción del 40% en tiempo de análisis"
+        },
+        "flow": {
+            "pt": [
+                { "title": "1. Ingestão de Documentos", "desc": "Upload seguro de PDFs, relatórios e dados estruturados criptografados." },
+                { "title": "2. Processamento RAG (Vetorização)", "desc": "Divisão de texto em blocos, geração de embeddings e inserção no pgvector." },
+                { "title": "3. Orquestração de Agente", "desc": "Decisão inteligente sobre ferramentas, busca semântica e contextualização." },
+                { "title": "4. Validação e Filtros (Guardrails)", "desc": "Verificação de conformidade de segurança e formatação contra alucinações." },
+                { "title": "5. Resposta ao Usuário", "desc": "Exibição de insights formatados com links diretos para as fontes citadas." }
+            ],
+            "en": [
+                { "title": "1. Document Ingestion", "desc": "Secure upload of encrypted PDFs, reports, and structured data." },
+                { "title": "2. RAG Processing (Vectorization)", "desc": "Splitting text into blocks, generating embeddings, and inserting into pgvector." },
+                { "title": "3. Agent Orchestration", "desc": "Intelligent decision on tools, semantic search, and contextualization." },
+                { "title": "4. Validation & Filters (Guardrails)", "desc": "Security compliance check and formatting to prevent hallucinations." },
+                { "title": "5. Response to User", "desc": "Display of formatted insights with direct links to cited sources." }
+            ],
+            "ru": [
+                { "title": "1. Загрузка документов", "desc": "Безопасная загрузка зашифрованных PDF, отчетов и структурированных данных." },
+                { "title": "2. Обработка RAG (Векторизация)", "desc": "Разбивка текста на блоки, генерация эмбеддингов и вставка в pgvector." },
+                { "title": "3. Оркестрация агентов", "desc": "Интеллектуальное решение о выборе инструментов, семантический поиск." },
+                { "title": "4. Валидация и фильтрация (Guardrails)", "desc": "Проверка безопасности и форматирования для исключения галлюцинаций." },
+                { "title": "5. Ответ пользователю", "desc": "Вывод форматированных ответов со ссылками на использованные источники." }
+            ],
+            "es": [
+                { "title": "1. Ingestión de Documentos", "desc": "Carga segura de PDFs, informes y datos estructurados cifrados." },
+                { "title": "2. Procesamiento RAG (Vectorización)", "desc": "División de texto en bloques, generación de embeddings e inserción en pgvector." },
+                { "title": "3. Orquestación del Agente", "desc": "Decisión inteligente sobre herramientas, búsqueda semántica y contextualización." },
+                { "title": "4. Validación y Filtros (Guardrails)", "desc": "Verificación de cumplimiento de seguridad y formateo contra alucinaciones." },
+                { "title": "5. Respuesta al Usuario", "desc": "Exhibición de respuestas formateadas con enlaces directos a las fuentes citadas." }
+            ]
+        },
+        "tabs": {
+            "pt": [
+                { "id": "chat", "label": "Workspace de Chat" },
+                { "id": "pipeline", "label": "Orquestrador de Pipeline" }
+            ],
+            "en": [
+                { "id": "chat", "label": "Chat Workspace" },
+                { "id": "pipeline", "label": "Pipeline Orchestrator" }
+            ],
+            "ru": [
+                { "id": "chat", "label": "Рабочая область чата" },
+                { "id": "pipeline", "label": "Оркестратор конвейера" }
+            ],
+            "es": [
+                { "id": "chat", "label": "Espacio de Chat" },
+                { "id": "pipeline", "label": "Orquestador de Pipeline" }
+            ]
+        }
+    },
+    "helios": {
+        "tag": {
+            "pt": "SaaS DE BIG DATA & LOGÍSTICA",
+            "en": "BIG DATA & LOGISTICS SaaS",
+            "ru": "SaaS ДЛЯ BIG DATA И ЛОГИСТИКИ",
+            "es": "SaaS DE BIG DATA Y LOGÍSTICA"
+        },
+        "title": {
+            "pt": "Helios Analytics Suite",
+            "en": "Helios Analytics Suite",
+            "ru": "Helios Analytics Suite",
+            "es": "Helios Analytics Suite"
+        },
+        "subtitle": {
+            "pt": "Dashboard de processamento de Big Data com atualizações em tempo real para controle logístico de grandes frotas transcontinentais.",
+            "en": "Big Data processing dashboard with real-time updates for logistical control of large transcontinental fleets.",
+            "ru": "Панель обработки больших данных с обновлениями в реальном времени для логистического контроля крупных трансконтинентальных автопарков.",
+            "es": "Dashboard de procesamiento de Big Data con actualizaciones en tiempo real para el control logístico de grandes flotas transcontinentales."
+        },
+        "stack": "Next.js / Go (Golang) / Apache Kafka / InfluxDB (Time Series) / Kubernetes",
+        "impact": {
+            "pt": "10M+ Eventos/seg | Latência < 50ms | Economia de 15% em combustível",
+            "en": "10M+ Events/sec | Latency < 50ms | 15% fuel savings",
+            "ru": "10M+ Событий/сек | Задержка < 50мс | Экономия топлива на 15%",
+            "es": "10M+ Eventos/seg | Latencia < 50ms | Ahorro del 15% en combustible"
+        },
+        "flow": {
+            "pt": [
+                { "title": "1. Telemetria IoT", "desc": "Dispositivos embarcados transmitem velocidade, carga, temperatura e rotas via 4G/Satélite." },
+                { "title": "2. Ingestão Distribuída (Kafka)", "desc": "Mensageria de alta vazão enfileira milhões de mensagens por segundo de forma resiliente." },
+                { "title": "3. Processamento de Stream (Go)", "desc": "Filtragem rápida de ruídos, cálculo instantâneo de KPIs e alertas operacionais automáticos." },
+                { "title": "4. Banco de Séries Temporais", "desc": "Inserção eficiente no InfluxDB para telemetria histórica e relatórios estatísticos." },
+                { "title": "5. WebSockets Real-Time", "desc": "Propagação instantânea dos eventos para o frontend dos operadores em milissegundos." }
+            ],
+            "en": [
+                { "title": "1. IoT Telemetry", "desc": "Embedded devices transmit speed, load, temperature, and routes via 4G/Satellite." },
+                { "title": "2. Distributed Ingestion (Kafka)", "desc": "High-throughput messaging queues millions of messages per second resiliently." },
+                { "title": "3. Stream Processing (Go)", "desc": "Fast noise filtering, instant KPI calculations, and automatic operational alerts." },
+                { "title": "4. Time Series Database", "desc": "Efficient insertion into InfluxDB for historical telemetry and statistical reports." },
+                { "title": "5. Real-Time WebSockets", "desc": "Instant event propagation to operators' frontend in milliseconds." }
+            ],
+            "ru": [
+                { "title": "1. Телеметрия IoT", "desc": "Встроенные устройства передают скорость, нагрузку, температуру и маршруты через 4G/спутник." },
+                { "title": "2. Распределенный прием (Kafka)", "desc": "Высокопроизводительная очередь обрабатывает миллионы сообщений в секунду." },
+                { "title": "3. Потоковая обработка (Go)", "desc": "Быстрая фильтрация шума, мгновенный расчет KPI и автоматические оповещения." },
+                { "title": "4. БД временных рядов", "desc": "Эффективная запись в InfluxDB для хранения истории телеметрии и аналитики." },
+                { "title": "5. WebSockets в реальном времени", "desc": "Мгновенная передача событий на фронтенд операторов за миллисекунды." }
+            ],
+            "es": [
+                { "title": "1. Telemetría IoT", "desc": "Dispositivos integrados transmiten velocidad, carga, temperatura y rutas vía 4G/Satélite." },
+                { "title": "2. Ingestión Distribuida (Kafka)", "desc": "Mensajería de alta capacidad encola millones de mensajes por segundo de forma resiliente." },
+                { "title": "3. Procesamiento de Stream (Go)", "desc": "Filtrado rápido de ruidos, cálculo instantáneo de KPIs y alertas operacionales automáticas." },
+                { "title": "4. Banco de Series Temporales", "desc": "Inserción eficiente en InfluxDB para telemetría histórica e informes estadísticos." },
+                { "title": "5. WebSockets Real-Time", "desc": "Propagación instantánea de eventos hacia el frontend de los operadores en milisegundos." }
+            ]
+        },
+        "tabs": {
+            "pt": [
+                { "id": "live-map", "label": "Mapa de Telemetria" },
+                { "id": "alerts", "label": "Central de Alertas" }
+            ],
+            "en": [
+                { "id": "live-map", "label": "Telemetry Map" },
+                { "id": "alerts", "label": "Alert Control" }
+            ],
+            "ru": [
+                { "id": "live-map", "label": "Карта телеметрии" },
+                { "id": "alerts", "label": "Центр оповещений" }
+            ],
+            "es": [
+                { "id": "live-map", "label": "Mapa de Telemetría" },
+                { "id": "alerts", "label": "Centro de Alertas" }
+            ]
+        }
+    }
+};
+
+function renderAetherflowChat(lang) {
+    const userMsg = {
+        "pt": "Analise o desempenho financeiro do Q2 e me dê os 3 principais pontos de atenção.",
+        "en": "Analyze Q2 financial performance and give me the top 3 points of attention.",
+        "ru": "Проанализируйте финансовые показатели за 2 квартал и назовите 3 основных момента.",
+        "es": "Analice el desempeño financiero del Q2 y déme los 3 puntos principales de atención."
+    }[lang];
+    
+    const assistantMsg = {
+        "pt": "Com base nos relatórios auditados do Q2, identifiquei três pontos críticos:<br><br>1. <strong>Aumento de 12% nos custos operacionais</strong> de logística na América Latina.<br>2. <strong>Margem EBITDA contraída em 1.5%</strong> devido ao preço das commodities.<br>3. <strong>Oportunidade de Hedge Cambial</strong> devido à volatilidade cambial das subsidiárias.",
+        "en": "Based on the audited Q2 reports, I identified three critical points:<br><br>1. <strong>12% increase in operational costs</strong> of logistics in Latin America.<br>2. <strong>EBITDA margin contracted by 1.5%</strong> due to commodity pricing.<br>3. <strong>Currency Hedging opportunity</strong> due to FX volatility in subsidiaries.",
+        "ru": "На основе аудированных отчетов за 2 квартал выявлено три критических момента:<br><br>1. <strong>Рост операционных расходов на 12%</strong> на логистику в Латинской Америке.<br>2. <strong>Сокращение маржи EBITDA на 1,5%</strong> из-за цен на сырье.<br>3. <strong>Возможность валютного хеджирования</strong> из-за колебаний курсов дочерних компаний.",
+        "es": "Basado en los informes auditados del Q2, identifiqué tres puntos críticos:<br><br>1. <strong>Aumento del 12% en los costos operativos</strong> de logística en América Latina.<br>2. <strong>Margen EBITDA contraído en 1.5%</strong> debido al precio de las materias primas.<br>3. <strong>Oportunidad de Cobertura Cambiaria</strong> debido a la volatilidad cambiaria de las subsidiarias."
+    }[lang];
+
+    const sourceLabel = {
+        "pt": "Fontes consultadas:",
+        "en": "Sources consulted:",
+        "ru": "Использованные источники:",
+        "es": "Fuentes consultadas:"
+    }[lang];
+
+    const placeholder = {
+        "pt": "Digite uma pergunta sobre conformidade ou finanças...",
+        "en": "Type a question about compliance or finance...",
+        "ru": "Введите вопрос о комплаенсе или финансах...",
+        "es": "Escriba una pregunta sobre cumplimiento o finanzas..."
+    }[lang];
+
+    return `
+        <div class="mockup-chat-container">
+            <div class="mockup-chat-sidebar">
+                <div class="sidebar-chat-item active"><i data-lucide="message-square" style="width:12px;height:12px;display:inline-block;margin-right:4px;"></i> Q2 Performance</div>
+                <div class="sidebar-chat-item"><i data-lucide="message-square" style="width:12px;height:12px;display:inline-block;margin-right:4px;"></i> Risk Compliance</div>
+                <div class="sidebar-chat-item"><i data-lucide="message-square" style="width:12px;height:12px;display:inline-block;margin-right:4px;"></i> Tax Audit 2025</div>
+            </div>
+            <div class="mockup-chat-area">
+                <div class="chat-history">
+                    <div class="chat-bubble user">${userMsg}</div>
+                    <div class="chat-bubble assistant">
+                        ${assistantMsg}
+                        <div class="rag-sources">
+                            <span style="font-size:0.65rem;color:#718096;width:100%;margin-bottom:0.2rem;">${sourceLabel}</span>
+                            <span class="source-tag">audit_report_q2_2026.pdf</span>
+                            <span class="source-tag">compliance_v4.db</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-box">
+                    <span>${placeholder}</span>
+                    <button><i data-lucide="send" style="width:12px;height:12px;"></i></button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderAetherflowPipeline(lang) {
+    const statusText = {
+        "pt": "[15:24:02] STATUS: Ativo. Todos os nós operando com latência < 22ms. Embeddings sincronizados.",
+        "en": "[15:24:02] STATUS: Active. All nodes operating with latency < 22ms. Embeddings synchronized.",
+        "ru": "[15:24:02] СТАТУС: Активен. Все узлы работают с задержкой < 22мс. Эмбеддинги синхронизированы.",
+        "es": "[15:24:02] ESTADO: Activo. Todos los nodos operando con latencia < 22ms. Embeddings sincronizados."
+    }[lang];
+
+    const node1 = { "pt": "Ingestão", "en": "Ingest", "ru": "Загрузка", "es": "Ingestión" }[lang];
+    const node2 = { "pt": "Vetorização", "en": "Vectorize", "ru": "Векторы", "es": "Vectorización" }[lang];
+    const node3 = { "pt": "RAG Search", "en": "RAG Search", "ru": "RAG Поиск", "es": "Buscar RAG" }[lang];
+    const node4 = { "pt": "Filtro Guardrail", "en": "Guardrail", "ru": "Guardrail", "es": "Guardrail" }[lang];
+
+    return `
+        <div class="pipeline-builder">
+            <div class="pipeline-nodes-row">
+                <div class="pipeline-node-card active">
+                    <i data-lucide="upload-cloud"></i>
+                    <div class="pipeline-node-info">
+                        <h6>${node1}</h6>
+                        <span>PDF / CSV / S3</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow active"><i data-lucide="arrow-right"></i></div>
+                <div class="pipeline-node-card active">
+                    <i data-lucide="database"></i>
+                    <div class="pipeline-node-info">
+                        <h6>${node2}</h6>
+                        <span>pgvector</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow active"><i data-lucide="arrow-right"></i></div>
+                <div class="pipeline-node-card active">
+                    <i data-lucide="search"></i>
+                    <div class="pipeline-node-info">
+                        <h6>${node3}</h6>
+                        <span>Semantic Search</span>
+                    </div>
+                </div>
+                <div class="pipeline-arrow"><i data-lucide="arrow-right"></i></div>
+                <div class="pipeline-node-card">
+                    <i data-lucide="shield-check"></i>
+                    <div class="pipeline-node-info">
+                        <h6>${node4}</h6>
+                        <span>LLM LlamaGuard</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pipeline-console-status">
+                ${statusText}
+            </div>
+        </div>
+    `;
+}
+
+function renderHeliosMap(lang) {
+    const lblActive = { "pt": "Frotas Ativas", "en": "Active Fleets", "ru": "Активные флоты", "es": "Flotas Activas" }[lang];
+    const lblOnTime = { "pt": "No Prazo", "en": "On-Time", "ru": "Вовремя", "es": "A Tiempo" }[lang];
+    const lblFuel = { "pt": "Combustível", "en": "Fuel Efficiency", "ru": "Топливо", "es": "Eficiencia" }[lang];
+
+    return `
+        <div class="mockup-map-container">
+            <div class="mockup-svg-map">
+                <svg viewBox="0 0 500 180" style="width:100%;height:100%;">
+                    <!-- Grid Background Lines -->
+                    <pattern id="map-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#map-grid)" />
+                    
+                    <!-- Routes Schematic -->
+                    <path class="map-route-line" d="M 50,40 L 150,40 L 220,100 L 380,100 L 450,140" />
+                    <path class="map-route-line active" d="M 50,140 L 120,90 L 280,90 L 350,130 L 450,40" />
+                    <path class="map-route-line" d="M 220,100 L 280,90" />
+                    
+                    <!-- Vehicle nodes -->
+                    <circle class="map-truck-node" cx="120" cy="90" r="5" />
+                    <circle class="map-truck-node alert" cx="280" cy="90" r="5" />
+                    <circle class="map-truck-node" cx="350" cy="110" r="5" />
+                </svg>
+            </div>
+            <div class="telemetry-kpi-grid">
+                <div class="telemetry-kpi-card">
+                    <span>${lblActive}</span>
+                    <h5 class="cyan-val">1,248</h5>
+                </div>
+                <div class="telemetry-kpi-card">
+                    <span>${lblOnTime}</span>
+                    <h5 class="green-val">98.7%</h5>
+                </div>
+                <div class="telemetry-kpi-card">
+                    <span>${lblFuel}</span>
+                    <h5>-15%</h5>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderHeliosAlerts(lang) {
+    const alerts = {
+        "pt": [
+            { "time": "15:25:01", "msg": "ALERTA: Desvio de rota detectado no Veículo #4402", "status": "Crítico", "class": "critical" },
+            { "time": "15:23:44", "msg": "Temperatura de carga instável na Unidade #1904 (Carnes)", "status": "Atenção", "class": "warning" },
+            { "time": "15:22:10", "msg": "Sensor de consumo de combustível calibrado no Veículo #0092", "status": "Resolvido", "class": "success" }
+        ],
+        "en": [
+            { "time": "15:25:01", "msg": "ALERT: Route deviation detected on Vehicle #4402", "status": "Critical", "class": "critical" },
+            { "time": "15:23:44", "msg": "Unstable cargo temp in Unit #1904 (Meats)", "status": "Warning", "class": "warning" },
+            { "time": "15:22:10", "msg": "Fuel consumption sensor calibrated on Vehicle #0092", "status": "Resolved", "class": "success" }
+        ],
+        "ru": [
+            { "time": "15:25:01", "msg": "ОПОВЕЩЕНИЕ: Отклонение маршрута ТС #4402", "status": "Критично", "class": "critical" },
+            { "time": "15:23:44", "msg": "Нестабильная температура груза в ТС #1904 (Мясо)", "status": "Внимание", "class": "warning" },
+            { "time": "15:22:10", "msg": "Датчик расхода топлива откалиброван на ТС #0092", "status": "Решено", "class": "success" }
+        ],
+        "es": [
+            { "time": "15:25:01", "msg": "ALERTA: Desviación de ruta detectada en el Vehículo #4402", "status": "Crítico", "class": "critical" },
+            { "time": "15:23:44", "msg": "Temperatura de carga inestable en Unidad #1904 (Carnes)", "status": "Atención", "class": "warning" },
+            { "time": "15:22:10", "msg": "Sensor de consumo de combustible calibrado en el Vehículo #0092", "status": "Resuelto", "class": "success" }
+        ]
+    }[lang];
+
+    let listHtml = "";
+    alerts.forEach(item => {
+        listHtml += `
+            <div class="alert-row ${item.class}">
+                <span class="alert-time">[${item.time}]</span>
+                <span class="alert-message">${item.msg}</span>
+                <span class="alert-status-badge">${item.status}</span>
+            </div>
+        `;
+    });
+
+    return `
+        <div class="mockup-alert-console">
+            ${listHtml}
+        </div>
+    `;
+}
+
+function openProjectModal(projectId) {
+    activeProjectId = projectId;
+    const project = projectDetails[projectId];
+    if (!project) return;
+    
+    const lang = i18nConfig.currentLanguage || 'pt';
+    
+    // Set static text
+    document.getElementById("modal-tag-text").textContent = project.tag[lang];
+    document.getElementById("modal-title").textContent = project.title[lang];
+    document.getElementById("modal-subtitle").textContent = project.subtitle[lang];
+    document.getElementById("modal-spec-stack").textContent = project.stack;
+    document.getElementById("modal-spec-impact").textContent = project.impact[lang];
+    
+    // Set headers
+    const lblFlow = { "pt": "Fluxo do Sistema", "en": "System Flow", "ru": "Процесс системы", "es": "Flujo del Sistema" }[lang];
+    const lblScreens = { "pt": "Telas e Funcionalidades", "en": "Screens & Features", "ru": "Экраны и функции", "es": "Telas y Funcionalidades" }[lang];
+    document.getElementById("modal-label-flow").textContent = lblFlow;
+    document.getElementById("modal-label-screens").textContent = lblScreens;
+
+    // Render flow diagram
+    const flowContainer = document.getElementById("modal-flow-diagram");
+    let flowHtml = "";
+    project.flow[lang].forEach((step, index) => {
+        flowHtml += `
+            <div class="flow-step-node">
+                <div class="flow-node-badge">${index + 1}</div>
+                <div class="flow-node-content">
+                    <h5>${step.title}</h5>
+                    <p>${step.desc}</p>
+                </div>
+                <div class="flow-node-line"></div>
+            </div>
+        `;
+    });
+    flowContainer.innerHTML = flowHtml;
+    
+    // Render tabs
+    const tabsContainer = document.getElementById("modal-tabs-container");
+    let tabsHtml = "";
+    project.tabs[lang].forEach((tab, index) => {
+        const isActive = activeTabId ? activeTabId === tab.id : index === 0;
+        if (isActive) activeTabId = tab.id;
+        tabsHtml += `
+            <button class="modal-tab-btn ${isActive ? 'active' : ''}" onclick="switchModalTab('${tab.id}')" id="tab-btn-${tab.id}">
+                ${tab.label}
+            </button>
+        `;
+    });
+    tabsContainer.innerHTML = tabsHtml;
+    
+    // Render default screen
+    renderScreenMockup();
+    
+    // Open modal
+    const modal = document.getElementById("portfolio-modal");
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+    
+    // Refresh Lucide Icons inside modal
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById("portfolio-modal");
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+    activeProjectId = null;
+    activeTabId = null;
+}
+
+function switchModalTab(tabId) {
+    activeTabId = tabId;
+    
+    // Update active class on tab buttons
+    const buttons = document.querySelectorAll(".modal-tab-btn");
+    buttons.forEach(btn => btn.classList.remove("active"));
+    
+    const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+    if (activeBtn) activeBtn.classList.add("active");
+    
+    // Redraw screen mockup
+    renderScreenMockup();
+}
+
+function renderScreenMockup() {
+    const lang = i18nConfig.currentLanguage || 'pt';
+    const displayContainer = document.getElementById("modal-screen-display");
+    if (!displayContainer || !activeProjectId || !activeTabId) return;
+    
+    let mockupHtml = "";
+    
+    // Window header wrapper mockup
+    const windowTitle = {
+        "chat": "AetherFlow AI Console - AgentChat v1.2",
+        "pipeline": "AetherFlow Pipeline Orchestrator v1.2",
+        "live-map": "Helios Fleet Telemetry Maps - Live Stream",
+        "alerts": "Helios Operational Alert Center - KernelLogs"
+    }[activeTabId];
+    
+    let innerContent = "";
+    if (activeProjectId === "aetherflow") {
+        if (activeTabId === "chat") {
+            innerContent = renderAetherflowChat(lang);
+        } else {
+            innerContent = renderAetherflowPipeline(lang);
+        }
+    } else if (activeProjectId === "helios") {
+        if (activeTabId === "live-map") {
+            innerContent = renderHeliosMap(lang);
+        } else {
+            innerContent = renderHeliosAlerts(lang);
+        }
+    }
+    
+    mockupHtml = `
+        <div class="mockup-screen">
+            <div class="mockup-window-header">
+                <div class="mockup-window-dots">
+                    <div class="mockup-dot red"></div>
+                    <div class="mockup-dot yellow"></div>
+                    <div class="mockup-dot green"></div>
+                </div>
+                <div class="mockup-window-title">${windowTitle}</div>
+            </div>
+            <div class="mockup-window-body">
+                ${innerContent}
+            </div>
+        </div>
+    `;
+    
+    displayContainer.innerHTML = mockupHtml;
+    
+    // Refresh Lucide inside mockup
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+}
+
+// Mount to window object for global availability
+window.openProjectModal = openProjectModal;
+window.closeProjectModal = closeProjectModal;
+window.switchModalTab = switchModalTab;

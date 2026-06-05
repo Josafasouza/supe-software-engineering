@@ -388,7 +388,7 @@
                         <p>Orquestrador inteligente de fluxos organizacionais integrado com IA Generativa privada e RAG para o setor financeiro.</p>
                         <div class="portfolio-footer">
                             <span class="stat-highlight">99.9% Disponibilidade</span>
-                            <a href="#contato" class="project-link">
+                            <a href="javascript:void(0)" onclick="openProjectModal('aetherflow')" class="project-link">
                                 <span>Ver Detalhes</span>
                                 <i data-lucide="arrow-right"></i>
                             </a>
@@ -411,7 +411,7 @@
                         <p>Dashboard de processamento de Big Data com atualizações em tempo real para controle logístico de grandes frotas transcontinentais.</p>
                         <div class="portfolio-footer">
                             <span class="stat-highlight">10M+ Eventos/sec</span>
-                            <a href="#contato" class="project-link">
+                            <a href="javascript:void(0)" onclick="openProjectModal('helios')" class="project-link">
                                 <span>Ver Detalhes</span>
                                 <i data-lucide="arrow-right"></i>
                             </a>
@@ -655,6 +655,54 @@
             <p class="tech-signature">Compilado com ⚡ Vanilla HTML/CSS/JS</p>
         </div>
     </footer>
+
+    <!-- Modal de Detalhes das Obras de Engenharia -->
+    <div id="portfolio-modal" class="modal-overlay">
+        <div class="modal-container glass-panel">
+            <button class="modal-close-btn" onclick="closeProjectModal()" aria-label="Fechar modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-project-tag">
+                    <span id="modal-tag-text">INTEGRAÇÃO DE DADOS</span>
+                </div>
+                <h2 id="modal-title" class="gradient-text">Project Title</h2>
+                <p id="modal-subtitle">Project Subtitle</p>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Coluna 1: Fluxo do Sistema -->
+                <div class="modal-col-flow">
+                    <h4 class="col-title"><i data-lucide="git-branch"></i> <span id="modal-label-flow">Fluxo do Sistema</span></h4>
+                    <div class="system-flow-diagram" id="modal-flow-diagram">
+                        <!-- Gerado dinamicamente via JS -->
+                    </div>
+                </div>
+                
+                <!-- Coluna 2: Telas das Funcionalidades -->
+                <div class="modal-col-screens">
+                    <h4 class="col-title"><i data-lucide="layout"></i> <span id="modal-label-screens">Telas e Funcionalidades</span></h4>
+                    <div class="modal-tabs" id="modal-tabs-container">
+                        <!-- Botões de abas gerados via JS -->
+                    </div>
+                    <div class="modal-screen-display" id="modal-screen-display">
+                        <!-- Mockup da tela do sistema em HTML/CSS gerado via JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="spec-item">
+                    <span class="spec-label"><i data-lucide="cpu"></i> Stack:</span>
+                    <span id="modal-spec-stack" class="spec-value">Technologies</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label"><i data-lucide="trending-up"></i> Impacto:</span>
+                    <span id="modal-spec-impact" class="spec-value">Metrics</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <!-- Lucide Icons para carregar os ícones modernos -->
