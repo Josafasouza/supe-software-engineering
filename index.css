@@ -1628,6 +1628,12 @@ body {
     background: #04030a;
     border-top: 1px solid var(--border-glass);
     padding: 6rem 0 3rem 0;
+    /* Override global variables to dark theme values for visibility inside the dark footer */
+    --text-primary: #f5f6f8;
+    --text-secondary: #9ea4b0;
+    --text-muted: #5e6472;
+    --border-glass: rgba(255, 255, 255, 0.08);
+    --accent-cyan: #00f2fe;
 }
 
 .footer-top {
