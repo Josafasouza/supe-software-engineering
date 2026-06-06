@@ -168,7 +168,41 @@ const translations = {
         ".status-desc": "Mapeamento de telemetria em tempo real dos microsserviços Supé.",
         ".status-badge-text": "TODOS OS SISTEMAS ONLINE",
         ".subsystem-status-text": "OPERACIONAL",
-        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Latência Geral da Rede (ms)"
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Latência Geral da Rede (ms)",
+        
+        // Insights
+        "title-insights": "Dev Insights | Supé Software Engineering",
+        ".insights-title": "Dev Insights",
+        ".insights-desc": "Nossas reflexões, tutoriais práticos e análises de arquitetura sobre engenharia de software de elite.",
+        ".back-home-text": "Voltar para Home",
+        ".search-input-placeholder": "Buscar artigos e tutoriais...",
+        ".insights-tag-all": "Todos",
+        ".insights-tag-arch": "Arquitetura",
+        ".insights-tag-code": "Código",
+        ".insights-tag-cloud": "Nuvem",
+        ".insights-tag-ai": "IA",
+        ".featured-badge-text": "AULA PRÁTICA EM DESTAQUE",
+        ".featured-lesson-title": "Refatorando Código Legado: A Transição de Herança para Composição",
+        ".featured-lesson-desc": "Assista à simulação passo a passo de uma refatoração em tempo real, aplicando o manifesto da Supé de composição sobre herança para desacoplar comportamento.",
+        ".featured-lesson-duration": "Duração: 14 min",
+        ".featured-lesson-author": "Ministrado pelo CEO Josafá de Pinho",
+        ".play-btn-text": "Iniciar Aula Interativa",
+        ".card-1-title-text": "Uso de Guard Clauses no C# e Java",
+        ".card-1-desc-text": "Como eliminar aninhamentos excessivos de ifs e estruturar métodos mais limpos, legíveis e fáceis de testar.",
+        ".card-1-read-text": "Ler Artigo • 6 min",
+        ".card-2-title-text": "Design Patterns na Prática: Composição",
+        ".card-2-desc-text": "Por que a herança clássica gera acoplamento rígido e como a composição de comportamento garante flexibilidade e escalabilidade.",
+        ".card-2-read-text": "Ler Artigo • 8 min",
+        ".card-3-title-text": "Otimizando RAG com Embeddings e Vector DB",
+        ".card-3-desc-text": "Como estruturar um fluxo de IA generativa com baixíssima latência utilizando pgvector no PostgreSQL.",
+        ".card-3-read-text": "Ler Artigo • 10 min",
+        ".card-4-title-text": "Infraestrutura Imutável com Terraform e AWS",
+        ".card-4-desc-text": "Construindo pipelines resilientes de CI/CD para deploy seguro de microsserviços em clusters Kubernetes EKS.",
+        ".card-4-read-text": "Ler Artigo • 7 min",
+        ".insights-newsletter-title-text": "Assine o Dev Insights",
+        ".insights-newsletter-desc-text": "Receba análises semanais de arquitetura de software de elite diretamente em sua caixa de entrada.",
+        ".insights-newsletter-btn-text": "Inscrever-se",
+        ".insights-newsletter-placeholder": "Seu e-mail corporativo..."
     },
     en: {
         // Navigation (Header & Footer)
@@ -323,7 +357,41 @@ const translations = {
         ".status-desc": "Real-time telemetry mapping of Supé microservices.",
         ".status-badge-text": "ALL SYSTEMS OPERATIONAL",
         ".subsystem-status-text": "OPERATIONAL",
-        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> General Network Latency (ms)"
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> General Network Latency (ms)",
+        
+        // Insights
+        "title-insights": "Dev Insights | Supé Software Engineering",
+        ".insights-title": "Dev Insights",
+        ".insights-desc": "Our reflections, practical tutorials, and architectural analyses on elite software engineering.",
+        ".back-home-text": "Back to Home",
+        ".search-input-placeholder": "Search articles and tutorials...",
+        ".insights-tag-all": "All",
+        ".insights-tag-arch": "Architecture",
+        ".insights-tag-code": "Code",
+        ".insights-tag-cloud": "Cloud",
+        ".insights-tag-ai": "AI",
+        ".featured-badge-text": "FEATURED LESSON",
+        ".featured-lesson-title": "Refactoring Legacy Code: The Transition from Inheritance to Composition",
+        ".featured-lesson-desc": "Watch the step-by-step simulation of a real-time refactoring, applying Supé's composition over inheritance manifesto to decouple behavior.",
+        ".featured-lesson-duration": "Duration: 14 min",
+        ".featured-lesson-author": "Led by CEO Josafá de Pinho",
+        ".play-btn-text": "Start Interactive Lesson",
+        ".card-1-title-text": "Using Guard Clauses in C# and Java",
+        ".card-1-desc-text": "How to eliminate excessive nesting of if statements and structure cleaner, more readable, and testable methods.",
+        ".card-1-read-text": "Read Article • 6 min",
+        ".card-2-title-text": "Design Patterns in Practice: Composition",
+        ".card-2-desc-text": "Why classical inheritance creates tight coupling and how behavioral composition ensures flexibility and scalability.",
+        ".card-2-read-text": "Read Article • 8 min",
+        ".card-3-title-text": "Optimizing RAG with Embeddings and Vector DB",
+        ".card-3-desc-text": "How to design a low-latency generative AI pipeline using pgvector in PostgreSQL.",
+        ".card-3-read-text": "Read Article • 10 min",
+        ".card-4-title-text": "Immutable Infrastructure with Terraform and AWS",
+        ".card-4-desc-text": "Building resilient CI/CD pipelines for secure microservices deployment in Kubernetes EKS clusters.",
+        ".card-4-read-text": "Read Article • 7 min",
+        ".insights-newsletter-title-text": "Subscribe to Dev Insights",
+        ".insights-newsletter-desc-text": "Get weekly deep-dives in elite software architecture straight to your inbox.",
+        ".insights-newsletter-btn-text": "Subscribe",
+        ".insights-newsletter-placeholder": "Your corporate email..."
     },
     ru: {
         // Navigation (Header & Footer)
@@ -478,7 +546,41 @@ const translations = {
         ".status-desc": "Картирование телеметрии микрослужб Supé в реальном времени.",
         ".status-badge-text": "ВСЕ СИСТЕМЫ РАБОТАЮТ",
         ".subsystem-status-text": "РАБОТАЕТ",
-        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Общая задержка сети (мс)"
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Общая задержка сети (мс)",
+        
+        // Insights
+        "title-insights": "Dev Insights | Supé Software Engineering",
+        ".insights-title": "Dev Insights",
+        ".insights-desc": "Наши размышления, практические руководства и архитектурный анализ высококлассной программной инженерии.",
+        ".back-home-text": "На главную",
+        ".search-input-placeholder": "Поиск статей и руководств...",
+        ".insights-tag-all": "Все",
+        ".insights-tag-arch": "Архитектура",
+        ".insights-tag-code": "Код",
+        ".insights-tag-cloud": "Облако",
+        ".insights-tag-ai": "ИИ",
+        ".featured-badge-text": "РЕКОМЕНДУЕМЫЙ УРОК",
+        ".featured-lesson-title": "Рефакторинг унаследованного кода: переход от наследования к композиции",
+        ".featured-lesson-desc": "Посмотрите пошаговую симуляцию рефакторинга в реальном времени с применением манифеста композиции над наследованием от Supé.",
+        ".featured-lesson-duration": "Длительность: 14 мин",
+        ".featured-lesson-author": "Проводит CEO Жозафа де Пиньо",
+        ".play-btn-text": "Начать интерактивный урок",
+        ".card-1-title-text": "Использование Guard Clauses в C# и Java",
+        ".card-1-desc-text": "Как исключить избыточную вложенность условных операторов и создавать более чистые, читаемые и тестируемые методы.",
+        ".card-1-read-text": "Читать статью • 6 мин",
+        ".card-2-title-text": "Шаблоны проектирования на практике: композиция",
+        ".card-2-desc-text": "Почему классическое наследование создает жесткую связь и как композиция поведения обеспечивает гибкость и масштабируемость.",
+        ".card-2-read-text": "Читать статью • 8 мин",
+        ".card-3-title-text": "Оптимизация RAG с эмбеддингами и векторными БД",
+        ".card-3-desc-text": "Как построить генеративный конвейер ИИ с низкой задержкой, используя pgvector в PostgreSQL.",
+        ".card-3-read-text": "Читать статью • 10 мин",
+        ".card-4-title-text": "Иммутабельная инфраструктура с Terraform и AWS",
+        ".card-4-desc-text": "Создание отказоустойчивых конвейеров CI/CD для безопасного развертывания микрослужб в кластерах Kubernetes EKS.",
+        ".card-4-read-text": "Читать статью • 7 мин",
+        ".insights-newsletter-title-text": "Подписаться на Dev Insights",
+        ".insights-newsletter-desc-text": "Получайте еженедельный глубокий анализ архитектуры ПО прямо на свою почту.",
+        ".insights-newsletter-btn-text": "Подписаться",
+        ".insights-newsletter-placeholder": "Ваш корпоративный email..."
     },
     es: {
         // Navigation (Header & Footer)
@@ -633,7 +735,41 @@ const translations = {
         ".status-desc": "Mapeo de telemetría en tiempo real de los microservicios de Supé.",
         ".status-badge-text": "TODOS LOS SISTEMAS ONLINE",
         ".subsystem-status-text": "OPERATIVO",
-        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Latencia General de Red (ms)"
+        ".status-chart-title": "<i data-lucide=\"activity\" style=\"color: var(--accent-cyan);\"></i> Latencia General de Red (ms)",
+        
+        // Insights
+        "title-insights": "Dev Insights | Supé Software Engineering",
+        ".insights-title": "Dev Insights",
+        ".insights-desc": "Nuestras reflexiones, tutoriales prácticos y análisis de arquitectura sobre ingeniería de software de élite.",
+        ".back-home-text": "Volver al Inicio",
+        ".search-input-placeholder": "Buscar artículos y tutoriales...",
+        ".insights-tag-all": "Todos",
+        ".insights-tag-arch": "Arquitectura",
+        ".insights-tag-code": "Código",
+        ".insights-tag-cloud": "Nube",
+        ".insights-tag-ai": "IA",
+        ".featured-badge-text": "CLASE PRÁCTICA DESTACADA",
+        ".featured-lesson-title": "Refactorizando Código Legado: La Transición de Herencia a Composición",
+        ".featured-lesson-desc": "Vea la simulación paso a paso de una refactoración en tiempo real, aplicando el manifiesto de composición sobre herencia de Supé para desacoplar comportamiento.",
+        ".featured-lesson-duration": "Duración: 14 min",
+        ".featured-lesson-author": "Impartido por el CEO Josafá de Pinho",
+        ".play-btn-text": "Iniciar Clase Interactiva",
+        ".card-1-title-text": "Uso de Guard Clauses en C# y Java",
+        ".card-1-desc-text": "Cómo eliminar anidamientos excesivos de ifs y estructurar métodos más limpios, legibles y fáciles de probar.",
+        ".card-1-read-text": "Leer Artículo • 6 min",
+        ".card-2-title-text": "Design Patterns en la Práctica: Composición",
+        ".card-2-desc-text": "Por qué la herencia clásica genera un acoplamiento rígido y cómo la composición de comportamiento garantiza flexibilidad y escalabilidad.",
+        ".card-2-read-text": "Leer Artículo • 8 min",
+        ".card-3-title-text": "Optimizando RAG con Embeddings y Vector DB",
+        ".card-3-desc-text": "Cómo diseñar un flujo de IA generativa con bajísima latencia utilizando pgvector en PostgreSQL.",
+        ".card-3-read-text": "Leer Artículo • 10 min",
+        ".card-4-title-text": "Infraestructura Inmutable con Terraform y AWS",
+        ".card-4-desc-text": "Construyendo pipelines de CI/CD resilientes para un despliegue seguro de microservicios en clústeres Kubernetes EKS.",
+        ".card-4-read-text": "Leer Artículo • 7 min",
+        ".insights-newsletter-title-text": "Suscríbase a Dev Insights",
+        ".insights-newsletter-desc-text": "Reciba análisis semanales de arquitectura de software de élite directamente en su bandeja de entrada.",
+        ".insights-newsletter-btn-text": "Suscribirse",
+        ".insights-newsletter-placeholder": "Su correo corporativo..."
     }
 };
 
@@ -1281,6 +1417,8 @@ function translatePage(lang) {
         document.title = dict["title-sla"];
     } else if (document.title.includes("Status")) {
         document.title = dict["title-status"];
+    } else if (document.title.includes("Insights")) {
+        document.title = dict["title-insights"];
     } else if (lang === 'en') {
         document.title = "Supé Software Engineering | Supreme Software Engineering";
     } else if (lang === 'ru') {
@@ -1291,7 +1429,7 @@ function translatePage(lang) {
 
     // Tradução em lote de todos os elementos
     for (const selector in dict) {
-        if (selector === "title" || selector === "title-terms" || selector === "title-sla" || selector === "title-status" || selector === "whatsapp-tooltip") continue;
+        if (selector === "title" || selector === "title-terms" || selector === "title-sla" || selector === "title-status" || selector === "title-insights" || selector === "whatsapp-tooltip") continue;
         
         const elements = document.querySelectorAll(selector);
         elements.forEach(elem => {

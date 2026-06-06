@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Insights | Supé Software Engineering</title>
+    
+    <!-- Meta Tags para SEO -->
+    <meta name="description" content="Portal de Dev Insights da Supé Software Engineering. Tutoriais práticos de engenharia de software de elite, princípios de arquitetura de alta performance e muito mais.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Estilos -->
+    <link rel="stylesheet" href="index.css">
+    
+    <style>
+        .insights-section {
+            padding: 10rem 0 6rem 0;
+            min-height: 90vh;
+        }
+        
+        .back-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            margin-bottom: 2.5rem;
+            transition: var(--transition-fast);
+        }
+        .back-home-link:hover {
+            color: var(--accent-cyan);
+            transform: translateX(-3px);
+        }
+        
+        .insights-header {
+            margin-bottom: 3.5rem;
+        }
+        .insights-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+        .insights-header p {
+            font-size: 1.15rem;
+            max-width: 680px;
+            color: var(--text-secondary);
+        }
+        
+        /* Barra de Busca e Filtros */
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1.2rem 0.8rem 2.8rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: var(--transition-fast);
+        }
+        .search-box input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+        }
+        
+        .filter-tags {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.6rem 1.4rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .filter-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-color: transparent;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 152, 176, 0.2);
+        }
+        
+        /* Seção Destaque Aula Prática */
+        .featured-insight-card {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3.5rem;
+            margin-bottom: 5rem;
+            padding: 2.5rem;
+            align-items: center;
+        }
+        @media (max-width: 992px) {
+            .featured-insight-card {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+        
+        /* Simulador do Player de Vídeo */
+        .video-player-container {
+            width: 100%;
+            height: 360px;
+            background: #05030f;
+            border-radius: 16px;
+            border: 1px solid var(--border-glass);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(10, 8, 28, 0.15);
+        }
+        .video-splash {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(8, 6, 20, 0.96), rgba(4, 2, 10, 0.98));
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+        .video-splash.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .video-play-btn {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
+            transition: var(--transition-fast);
+            animation: pulse-ring 2s infinite;
+        }
+        .video-play-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 35px rgba(0, 242, 254, 0.5);
+        }
+        .video-play-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: #ffffff;
+            margin-left: 5px;
+        }
+        
+        .video-splash-bg-mesh {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(0, 242, 254, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 242, 254, 0);
+            }
+        }
+        
+        /* Console Interativo de Compilação */
+        .video-console {
+            width: 100%;
+            height: 100%;
+            padding: 1.8rem;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #05030f;
+            box-sizing: border-box;
+        }
+        .console-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .console-dots {
+            display: flex;
+            gap: 0.4rem;
+        }
+        .console-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .console-dot.red { background: #ff5f56; }
+        .console-dot.yellow { background: #ffbd2e; }
+        .console-dot.green { background: #27c93f; }
+        .console-title-text {
+            color: #636884;
+            font-size: 0.75rem;
+        }
+        .console-output-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .console-log-line {
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s ease;
+            line-height: 1.4;
+        }
+        .console-log-line.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .console-log-line.cyan { color: #00f2fe; }
+        .console-log-line.purple { color: #c084fc; }
+        .console-log-line.green { color: #4ade80; }
+        .console-log-line.yellow { color: #facc15; }
+        .console-log-line.gray { color: #64748b; }
+        
+        .console-progress-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .console-progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+        .console-bar-track {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .console-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #00f2fe, #7f00ff);
+            transition: width 0.1s linear;
+        }
+        
+        /* Detalhes do Destaque */
+        .featured-insight-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .featured-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 152, 176, 0.08);
+            border: 1px solid rgba(0, 152, 176, 0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            width: fit-content;
+            letter-spacing: 0.05em;
+        }
+        .featured-insight-details h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1.3;
+        }
+        .featured-insight-details p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        .featured-meta {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-glass);
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .featured-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        /* Grid de Artigos */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+        @media (max-width: 768px) {
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .insight-card {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(13, 11, 33, 0.04);
+            border-color: rgba(0, 152, 176, 0.2);
+        }
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-category-tag {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-purple);
+        }
+        .card-category-tag.code-tag { color: var(--accent-cyan); }
+        .card-category-tag.ai-tag { color: var(--accent-magenta); }
+        .card-category-tag.cloud-tag { color: var(--accent-blue); }
+        
+        .card-reading-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .insight-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+        .insight-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .card-author {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: var(--transition-fast);
+        }
+        .card-link:hover {
+            color: var(--accent-purple);
+        }
+        .card-link svg {
+            width: 16px;
+            height: 16px;
+            transition: var(--transition-fast);
+        }
+        .card-link:hover svg {
+            transform: translateX(3px);
+        }
+        
+        /* Newsletter Box */
+        .newsletter-panel {
+            padding: 3.5rem;
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        @media (max-width: 992px) {
+            .newsletter-panel {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                padding: 2.5rem;
+            }
+        }
+        .newsletter-text h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            color: var(--text-primary);
+        }
+        .newsletter-text p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+            width: 100%;
+        }
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 0.9rem 1.4rem;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: var(--transition-fast);
+        }
+        .newsletter-form input:focus {
+            border-color: var(--accent-cyan);
+            background: #ffffff;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+        }
+        .newsletter-form button {
+            padding: 0.9rem 2rem;
+            border-radius: 100px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 152, 176, 0.15);
+            transition: var(--transition-fast);
+        }
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 152, 176, 0.25);
+        }
+        
+        .newsletter-success {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            text-align: center;
+            width: 100%;
+        }
+        .success-icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 255, 135, 0.08);
+            border: 1px solid rgba(0, 255, 135, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+        }
+        .newsletter-success h4 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .newsletter-success p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Fundo de Grade Cibernética Estática e Efeitos Glow -->
+    <div class="cyber-grid"></div>
+    <div class="radial-glow glow-1"></div>
+    <div class="radial-glow glow-2"></div>
+
+    <!-- Header / Barra de Navegação -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad)" stroke-width="6"/>
+                        <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                        <defs>
+                            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#7f00ff" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">SUPÉ</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html#hero" class="nav-link">Home</a></li>
+                    <li><a href="index.html#dna" class="nav-link">DNA</a></li>
+                    <li><a href="index.html#servicos" class="nav-link">Soluções</a></li>
+                    <li><a href="index.html#processo" class="nav-link">Integração</a></li>
+                    <li><a href="index.html#portfolio" class="nav-link">Portfólio</a></li>
+                    <li><a href="index.html#terminal" class="nav-link">Console</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-selector-wrapper" id="lang-selector-container"></div>
+                <a href="index.html#contato" class="btn-cta-nav">
+                    <span data-i18n="nav-cta-contact">Fale Conosco</span>
+                    <i data-lucide="arrow-up-right"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="insights-section container">
+            <a href="index.html" class="back-home-link">
+                <i data-lucide="arrow-left"></i> <span class="back-home-text">Voltar para Home</span>
+            </a>
+            
+            <div class="insights-header">
+                <h1 class="gradient-text insights-title">Dev Insights</h1>
+                <p class="insights-desc">Nossas reflexões, tutoriais práticos e análises de arquitetura sobre engenharia de software de elite.</p>
+            </div>
+            
+            <!-- Barra de Controle (Busca e Filtros) -->
+            <div class="controls-row">
+                <div class="search-box">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="insights-search" class="search-input-placeholder" placeholder="Buscar artigos e tutoriais...">
+                </div>
+                
+                <div class="filter-tags">
+                    <button class="filter-btn active" data-filter="all"><span class="insights-tag-all">Todos</span></button>
+                    <button class="filter-btn" data-filter="arch"><span class="insights-tag-arch">Arquitetura</span></button>
+                    <button class="filter-btn" data-filter="code"><span class="insights-tag-code">Código</span></button>
+                    <button class="filter-btn" data-filter="cloud"><span class="insights-tag-cloud">Nuvem</span></button>
+                    <button class="filter-btn" data-filter="ai"><span class="insights-tag-ai">IA</span></button>
+                </div>
+            </div>
+            
+            <!-- Insight em Destaque (Player Interativo) -->
+            <div class="featured-insight-card glass-panel">
+                <div class="video-player-container" id="video-lesson-player">
+                    <!-- Splash Overlay -->
+                    <div class="video-splash" id="video-splash-screen">
+                        <svg class="video-splash-bg-mesh" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="splash-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0, 242, 254, 0.05)" stroke-width="0.5"/>
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#splash-grid)" />
+                        </svg>
+                        <button class="video-play-btn" onclick="startSimulatedLesson()" aria-label="Play Lesson">
+                            <i data-lucide="play"></i>
+                        </button>
+                        <span class="video-play-text play-btn-text">Iniciar Aula Interativa</span>
+                    </div>
+                    
+                    <!-- Console da Vídeo-Aula Simulada -->
+                    <div class="video-console">
+                        <div class="console-header-bar">
+                            <div class="console-dots">
+                                <span class="console-dot red"></span>
+                                <span class="console-dot yellow"></span>
+                                <span class="console-dot green"></span>
+                            </div>
+                            <span class="console-title-text">supe_refactoring_simulator.exe</span>
+                            <i data-lucide="monitor" style="width: 14px; height: 14px; color: #636884;"></i>
+                        </div>
+                        
+                        <div class="console-output-area" id="lesson-console-output">
+                            <!-- Injetado dinamicamente via JS -->
+                        </div>
+                        
+                        <div class="console-progress-row">
+                            <div class="console-progress-info">
+                                <span>Refactoring: Composition Over Inheritance</span>
+                                <span id="lesson-progress-percent">0%</span>
+                            </div>
+                            <div class="console-bar-track">
+                                <div class="console-bar-fill" id="lesson-progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="featured-insight-details">
+                    <div class="featured-tag">
+                        <i data-lucide="award"></i>
+                        <span class="featured-badge-text">AULA PRÁTICA EM DESTAQUE</span>
+                    </div>
+                    <h2 class="featured-lesson-title">Refatorando Código Legado: A Transição de Herança para Composição</h2>
+                    <p class="featured-lesson-desc">Assista à simulação passo a passo de uma refatoração em tempo real, aplicando o manifesto da Supé de composição sobre herança para desacoplar comportamento.</p>
+                    <div class="featured-meta">
+                        <span><i data-lucide="clock"></i> <span class="featured-lesson-duration">Duração: 14 min</span></span>
+                        <span><i data-lucide="user"></i> <span class="featured-lesson-author">Ministrado pelo CEO Josafá de Pinho</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Grid de Artigos -->
+            <div class="insights-grid" id="insights-grid-container">
+                <!-- Card 1 -->
+                <div class="insight-card glass-panel" data-category="code">
+                    <div class="card-top">
+                        <span class="card-category-tag code-tag">Código</span>
+                        <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 6 min</span>
+                    </div>
+                    <h3 class="card-1-title-text">Uso de Guard Clauses no C# e Java</h3>
+                    <p class="card-1-desc-text">Como eliminar aninhamentos excessivos de ifs e estruturar métodos mais limpos, legíveis e fáceis de testar.</p>
+                    <div class="card-footer">
+                        <span class="card-author">Time de Engenharia</span>
+                        <a href="javascript:void(0)" class="card-link">
+                            <span class="card-1-read-text">Ler Artigo • 6 min</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="insight-card glass-panel" data-category="arch">
+                    <div class="card-top">
+                        <span class="card-category-tag">Arquitetura</span>
+                        <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 8 min</span>
+                    </div>
+                    <h3 class="card-2-title-text">Design Patterns na Prática: Composição</h3>
+                    <p class="card-2-desc-text">Por que a herança clássica gera acoplamento rígido e como a composição de comportamento garante flexibilidade e escalabilidade.</p>
+                    <div class="card-footer">
+                        <span class="card-author">CEO Josafá de Pinho</span>
+                        <a href="javascript:void(0)" class="card-link">
+                            <span class="card-2-read-text">Ler Artigo • 8 min</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="insight-card glass-panel" data-category="ai">
+                    <div class="card-top">
+                        <span class="card-category-tag ai-tag">IA</span>
+                        <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 10 min</span>
+                    </div>
+                    <h3 class="card-3-title-text">Otimizando RAG com Embeddings e Vector DB</h3>
+                    <p class="card-3-desc-text">Como estruturar um fluxo de IA generativa com baixíssima latência utilizando pgvector no PostgreSQL.</p>
+                    <div class="card-footer">
+                        <span class="card-author">Time de Engenharia</span>
+                        <a href="javascript:void(0)" class="card-link">
+                            <span class="card-3-read-text">Ler Artigo • 10 min</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="insight-card glass-panel" data-category="cloud">
+                    <div class="card-top">
+                        <span class="card-category-tag cloud-tag">Nuvem</span>
+                        <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 7 min</span>
+                    </div>
+                    <h3 class="card-4-title-text">Infraestrutura Imutável com Terraform e AWS</h3>
+                    <p class="card-4-desc-text">Construindo pipelines resilientes de CI/CD para deploy seguro de microsserviços em clusters Kubernetes EKS.</p>
+                    <div class="card-footer">
+                        <span class="card-author">CEO Josafá de Pinho</span>
+                        <a href="javascript:void(0)" class="card-link">
+                            <span class="card-4-read-text">Ler Artigo • 7 min</span>
+                            <i data-lucide="arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Newsletter Banner -->
+            <div class="newsletter-panel glass-panel">
+                <div class="newsletter-text">
+                    <h3 class="insights-newsletter-title-text">Assine o Dev Insights</h3>
+                    <p class="insights-newsletter-desc-text">Receba análises semanais de arquitetura de software de elite diretamente em sua caixa de entrada.</p>
+                </div>
+                
+                <div id="newsletter-form-container">
+                    <form class="newsletter-form" id="insights-newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                        <input type="email" required id="newsletter-email" class="insights-newsletter-placeholder" placeholder="Seu e-mail corporativo...">
+                        <button type="submit"><span class="insights-newsletter-btn-text">Inscrever-se</span></button>
+                    </form>
+                    
+                    <div class="newsletter-success hidden" id="newsletter-success-box">
+                        <div class="success-icon-box">
+                            <i data-lucide="check" style="width: 24px; height: 24px;"></i>
+                        </div>
+                        <h4>Inscrição Confirmada!</h4>
+                        <p>Você foi adicionado à lista do Dev Insights da Supé.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo-area">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="50,15 85,35 85,75 50,95 15,75 15,35" fill="none" stroke="url(#logo-grad-footer)" stroke-width="6"/>
+                            <polyline points="35,45 50,30 65,45" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="35,60 50,75 65,60" fill="none" stroke="#7f00ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="50" cy="52" r="6" fill="#00f2fe"/>
+                            <defs>
+                                <linearGradient id="logo-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#7f00ff" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">SUPÉ</span>
+                </a>
+                <p class="brand-slogan">Engenharia de software de altíssimo desempenho. Projetando o futuro através de ecossistemas perfeitamente integrados.</p>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html#hero">Home</a></li>
+                        <li><a href="index.html#dna">DNA Supé</a></li>
+                        <li><a href="index.html#servicos">Soluções</a></li>
+                        <li><a href="index.html#processo">Integração</a></li>
+                        <li><a href="index.html#portfolio">Casos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Conecte-se</h4>
+                    <ul>
+                        <li><a href="#"><i data-lucide="linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i data-lucide="github"></i> GitHub Space</a></li>
+                        <li><a href="#"><i data-lucide="twitter"></i> Twitter / X</a></li>
+                        <li><a href="insights.html"><i data-lucide="youtube"></i> Dev Insights</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Segurança e Termos</h4>
+                    <ul>
+                        <li><a href="privacidade.html">Privacidade</a></li>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                        <li><a href="sla.html">SLA de Engenharia</a></li>
+                        <li><a href="status.html">Status do Núcleo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Supé Software Engineering. Todos os direitos reservados. CEO Josafá de Pinho Souza.</p>
+            <p class="tech-signature">Compilado com ⚡ Vanilla HTML/CSS/JS</p>
+        </div>
+    </footer>
+
+    <!-- Lucide Icons para carregar os ícones modernos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            lucide.createIcons();
+        });
+    </script>
+    <script src="app.js"></script>
+
+    <!-- Lógica de Simulação Local -->
+    <script>
+        // Lógica de Compilação/Aula Interativa
+        let lessonInterval = null;
+        let isLessonPlaying = false;
+        
+        const PT_LOGS = [
+            { text: "> Carregando código legado contendo acoplamento rígido...", color: "gray" },
+            { text: "> Erro: Herança inadequada detectada em 'class LegacyDog : Mammal'...", color: "yellow" },
+            { text: "> Iniciando Refatoração: Removendo herança semântica inválida...", color: "cyan" },
+            { text: "> Extraindo comportamentos em interfaces dedicadas...", color: "cyan" },
+            { text: "> Interface IWalkable e IBarkable criadas com sucesso.", color: "green" },
+            { text: "> Injetando comportamentos WalkBehavior e BarkBehavior via injeção...", color: "purple" },
+            { text: "> class Dog refatorada aplicando COMPOSIÇÃO SOBRE HERANÇA.", color: "green" },
+            { text: "> Compilando novo módulo com otimizações e Guard Clauses...", color: "cyan" },
+            { text: "> Validando testes automatizados: Dog.Walk() -> OK.", color: "green" },
+            { text: "> Validando testes automatizados: Dog.Bark() -> OK.", color: "green" },
+            { text: "> [SUCESSO] Sistema de comportamento compilado sem erros de herança!", color: "green" }
+        ];
+
+        const EN_LOGS = [
+            { text: "> Loading legacy code with tight coupling...", color: "gray" },
+            { text: "> Warning: Invalid inheritance detected in 'class LegacyDog : Mammal'...", color: "yellow" },
+            { text: "> Starting Refactoring: Removing semantic coupling...", color: "cyan" },
+            { text: "> Extracting behaviors into dedicated interfaces...", color: "cyan" },
+            { text: "> IWalkable and IBarkable contracts successfully defined.", color: "green" },
+            { text: "> Composing WalkBehavior and BarkBehavior components dynamically...", color: "purple" },
+            { text: "> class Dog refactored utilizing COMPOSITION OVER INHERITANCE.", color: "green" },
+            { text: "> Compiling modules with Guard Clause protection...", color: "cyan" },
+            { text: "> Running validation suite: Dog.Walk() -> OK.", color: "green" },
+            { text: "> Running validation suite: Dog.Bark() -> OK.", color: "green" },
+            { text: "> [SUCCESS] Behavior system compiled with high cohesion!", color: "green" }
+        ];
+
+        const RU_LOGS = [
+            { text: "> Загрузка унаследованного кода с жесткой связью...", color: "gray" },
+            { text: "> Предупреждение: Неверное наследование в 'class LegacyDog : Mammal'...", color: "yellow" },
+            { text: "> Запуск рефакторинга: Удаление семантической зависимости...", color: "cyan" },
+            { text: "> Выделение поведения в отдельные интерфейсы...", color: "cyan" },
+            { text: "> Интерфейсы IWalkable и IBarkable успешно определены.", color: "green" },
+            { text: "> Сборка компонентов WalkBehavior и BarkBehavior в конструкторе...", color: "purple" },
+            { text: "> class Dog реорганизован с КОМПОЗИЦИЕЙ ВМЕСТО НАСЛЕДОВАНИЯ.", color: "green" },
+            { text: "> Компиляция модулей с защитными условиями (Guard Clauses)...", color: "cyan" },
+            { text: "> Запуск автотестов: Dog.Walk() -> OK.", color: "green" },
+            { text: "> Запуск автотестов: Dog.Bark() -> OK.", color: "green" },
+            { text: "> [УСПЕХ] Система поведения скомпилирована без ошибок связи!", color: "green" }
+        ];
+
+        const ES_LOGS = [
+            { text: "> Cargando código legado con acoplamiento rígido...", color: "gray" },
+            { text: "> Advertencia: Herencia no válida en 'class LegacyDog : Mammal'...", color: "yellow" },
+            { text: "> Iniciando Refactorización: Eliminando acoplamiento semántico...", color: "cyan" },
+            { text: "> Extrayendo comportamientos en interfaces dedicadas...", color: "cyan" },
+            { text: "> Contratos IWalkable e IBarkable definidos correctamente.", color: "green" },
+            { text: "> Componiendo WalkBehavior y BarkBehavior mediante inyección...", color: "purple" },
+            { text: "> class Dog refactorizada aplicando COMPOSICIÓN SOBRE HERENCIA.", color: "green" },
+            { text: "> Compilando módulo con protección de Guard Clauses...", color: "cyan" },
+            { text: "> Validando conjunto de pruebas: Dog.Walk() -> OK.", color: "green" },
+            { text: "> Validando conjunto de pruebas: Dog.Bark() -> OK.", color: "green" },
+            { text: "> [ÉXITO] ¡Sistema de comportamiento compilado con alta cohesión!", color: "green" }
+        ];
+
+        function startSimulatedLesson() {
+            if (isLessonPlaying) return;
+            isLessonPlaying = true;
+            
+            const splash = document.getElementById("video-splash-screen");
+            splash.classList.add("hidden");
+            
+            const outputArea = document.getElementById("lesson-console-output");
+            outputArea.innerHTML = "";
+            
+            const progressBar = document.getElementById("lesson-progress-bar");
+            const progressPercent = document.getElementById("lesson-progress-percent");
+            progressBar.style.width = "0%";
+            progressPercent.textContent = "0%";
+            
+            const currentLang = localStorage.getItem("supe-lang") || "pt";
+            let logsToUse = PT_LOGS;
+            if (currentLang === "en") logsToUse = EN_LOGS;
+            else if (currentLang === "ru") logsToUse = RU_LOGS;
+            else if (currentLang === "es") logsToUse = ES_LOGS;
+            
+            let logIndex = 0;
+            const totalSteps = logsToUse.length;
+            
+            lessonInterval = setInterval(() => {
+                if (logIndex < totalSteps) {
+                    const logData = logsToUse[logIndex];
+                    const logLine = document.createElement("div");
+                    logLine.className = `console-log-line ${logData.color}`;
+                    logLine.textContent = logData.text;
+                    outputArea.appendChild(logLine);
+                    
+                    // Auto scroll to bottom
+                    outputArea.scrollTop = outputArea.scrollHeight;
+                    
+                    // Trigger fade in animation
+                    setTimeout(() => {
+                        logLine.classList.add("show");
+                    }, 20);
+                    
+                    logIndex++;
+                    const percentVal = Math.round((logIndex / totalSteps) * 100);
+                    progressBar.style.width = `${percentVal}%`;
+                    progressPercent.textContent = `${percentVal}%`;
+                } else {
+                    clearInterval(lessonInterval);
+                    setTimeout(() => {
+                        // Reset player button
+                        splash.classList.remove("hidden");
+                        isLessonPlaying = false;
+                        progressBar.style.width = "0%";
+                        progressPercent.textContent = "0%";
+                    }, 4000);
+                }
+            }, 1000);
+        }
+
+        // Lógica de Filtro dos Artigos
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                // Remove active class from all buttons
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                
+                const filter = btn.getAttribute("data-filter");
+                const cards = document.querySelectorAll(".insight-card");
+                
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute("data-category");
+                    if (filter === "all" || cardCategory === filter) {
+                        card.classList.remove("hidden");
+                        // Fade-in animation
+                        card.style.opacity = "0";
+                        setTimeout(() => {
+                            card.style.opacity = "1";
+                            card.style.transition = "opacity 0.4s ease";
+                        }, 50);
+                    } else {
+                        card.classList.add("hidden");
+                    }
+                });
+            });
+        });
+
+        // Lógica de busca em tempo real
+        const searchInput = document.getElementById("insights-search");
+        if (searchInput) {
+            searchInput.addEventListener("input", () => {
+                const query = searchInput.value.toLowerCase().trim();
+                const cards = document.querySelectorAll(".insight-card");
+                const activeFilterBtn = document.querySelector(".filter-btn.active");
+                const activeFilter = activeFilterBtn ? activeFilterBtn.getAttribute("data-filter") : "all";
+                
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute("data-category");
+                    const titleText = card.querySelector("h3").textContent.toLowerCase();
+                    const descText = card.querySelector("p").textContent.toLowerCase();
+                    
+                    const matchesSearch = titleText.includes(query) || descText.includes(query);
+                    const matchesFilter = activeFilter === "all" || cardCategory === activeFilter;
+                    
+                    if (matchesSearch && matchesFilter) {
+                        card.classList.remove("hidden");
+                    } else {
+                        card.classList.add("hidden");
+                    }
+                });
+            });
+        }
+
+        // Formulário Newsletter
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById("insights-newsletter-form");
+            const successBox = document.getElementById("newsletter-success-box");
+            
+            form.classList.add("hidden");
+            successBox.classList.remove("hidden");
+            
+            // Simular gravação e reset após 10 segundos
+            setTimeout(() => {
+                form.classList.remove("hidden");
+                successBox.classList.add("hidden");
+                form.reset();
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
