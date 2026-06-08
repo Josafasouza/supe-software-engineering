@@ -373,6 +373,7 @@
             gap: 1.5rem;
             position: relative;
             transition: var(--transition-smooth);
+            cursor: pointer;
         }
         .insight-card:hover {
             transform: translateY(-5px);
@@ -695,7 +696,7 @@
             <!-- Grid de Artigos -->
             <div class="insights-grid" id="insights-grid-container">
                 <!-- Card 1 -->
-                <div class="insight-card glass-panel" data-category="code">
+                <div class="insight-card glass-panel" data-category="code" onclick="openArticleModal('guard-clauses')">
                     <div class="card-top">
                         <span class="card-category-tag code-tag">Código</span>
                         <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 6 min</span>
@@ -712,7 +713,7 @@
                 </div>
                 
                 <!-- Card 2 -->
-                <div class="insight-card glass-panel" data-category="arch">
+                <div class="insight-card glass-panel" data-category="arch" onclick="openArticleModal('composition')">
                     <div class="card-top">
                         <span class="card-category-tag">Arquitetura</span>
                         <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 8 min</span>
@@ -729,7 +730,7 @@
                 </div>
                 
                 <!-- Card 3 -->
-                <div class="insight-card glass-panel" data-category="ai">
+                <div class="insight-card glass-panel" data-category="ai" onclick="openArticleModal('rag')">
                     <div class="card-top">
                         <span class="card-category-tag ai-tag">IA</span>
                         <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 10 min</span>
@@ -746,7 +747,7 @@
                 </div>
                 
                 <!-- Card 4 -->
-                <div class="insight-card glass-panel" data-category="cloud">
+                <div class="insight-card glass-panel" data-category="cloud" onclick="openArticleModal('terraform')">
                     <div class="card-top">
                         <span class="card-category-tag cloud-tag">Nuvem</span>
                         <span class="card-reading-time"><i data-lucide="book-open" style="width: 12px; height: 12px; display: inline; vertical-align: middle; margin-right: 3px;"></i> 7 min</span>
@@ -852,6 +853,35 @@
         </div>
     </footer>
 
+    <!-- Modal de Leitura de Artigos -->
+    <div id="article-modal" class="modal-overlay">
+        <div class="modal-container glass-panel" style="max-width: 800px;">
+            <button class="modal-close-btn" onclick="closeArticleModal()" aria-label="Fechar modal">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-header">
+                <div class="modal-project-tag" style="background: rgba(0, 152, 176, 0.05); border-color: rgba(0, 152, 176, 0.12);">
+                    <span id="modal-article-category" style="color: var(--accent-cyan); font-family: var(--font-heading); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;">CATEGORIA</span>
+                </div>
+                <h2 id="modal-article-title" class="gradient-text" style="margin-top: 0.8rem; margin-bottom: 0.8rem; font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 2.5vw, 2rem);">Título do Artigo</h2>
+                <div class="featured-meta" style="border-top: none; padding-top: 0; margin-top: 0; gap: 1.5rem;">
+                    <span style="font-size: 0.85rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.3rem;"><i data-lucide="clock" style="width: 14px; height: 14px;"></i> <span id="modal-article-readtime">6 min</span></span>
+                    <span style="font-size: 0.85rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.3rem;"><i data-lucide="user" style="width: 14px; height: 14px;"></i> <span id="modal-article-author">Autor</span></span>
+                </div>
+            </div>
+            
+            <div class="modal-body" style="grid-template-columns: 1fr; display: block; max-height: 58vh; overflow-y: auto; padding: 2rem 3rem 2.5rem 3rem; box-sizing: border-box; line-height: 1.7; color: var(--text-secondary);">
+                <div id="modal-article-content" style="font-size: 1rem;">
+                    <!-- Conteúdo HTML do artigo injetado dinamicamente -->
+                </div>
+            </div>
+            
+            <div class="modal-footer" style="justify-content: flex-end; padding: 1.2rem 3rem;">
+                <button class="btn btn-secondary btn-sm" onclick="closeArticleModal()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Lucide Icons para carregar os ícones modernos -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -859,6 +889,7 @@
             lucide.createIcons();
         });
     </script>
+    <script src="insights-data.js"></script>
     <script src="app.js"></script>
 
     <!-- Lógica de Simulação Local -->
@@ -1049,6 +1080,63 @@
                 form.reset();
             }, 10000);
         }
+
+        // Lógica de Leitura de Artigos em Modal
+        let activeArticleId = null;
+
+        function openArticleModal(articleId) {
+            activeArticleId = articleId;
+            const currentLang = localStorage.getItem("supe-lang") || "pt";
+            renderArticleContent(articleId, currentLang);
+            
+            const modal = document.getElementById("article-modal");
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden"; // Desativa scroll da página de fundo
+        }
+
+        function closeArticleModal() {
+            const modal = document.getElementById("article-modal");
+            modal.classList.remove("active");
+            document.body.style.overflow = ""; // Reativa scroll da página
+            activeArticleId = null;
+        }
+
+        function renderArticleContent(articleId, lang) {
+            const langArticles = articleContents[lang] || articleContents["pt"];
+            const article = langArticles[articleId];
+            if (!article) return;
+            
+            document.getElementById("modal-article-category").textContent = article.category.toUpperCase();
+            document.getElementById("modal-article-title").textContent = article.title;
+            document.getElementById("modal-article-readtime").textContent = article.readTime;
+            document.getElementById("modal-article-author").textContent = article.author;
+            document.getElementById("modal-article-content").innerHTML = article.content;
+            
+            // Recriar ícones lucide injetados dinamicamente no modal
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        }
+
+        // Eventos do Modal (Esc e Clique Fora)
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                closeArticleModal();
+            }
+        });
+
+        document.getElementById("article-modal").addEventListener("click", (e) => {
+            if (e.target.id === "article-modal") {
+                closeArticleModal();
+            }
+        });
+
+        // Escutar evento global de mudança de idioma para atualizar artigo aberto
+        document.addEventListener("supe-language-changed", (e) => {
+            if (activeArticleId) {
+                renderArticleContent(activeArticleId, e.detail.language);
+            }
+        });
     </script>
 </body>
 </html>

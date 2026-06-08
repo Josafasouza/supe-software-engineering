@@ -1457,9 +1457,11 @@ function translatePage(lang) {
     if (messageInput && dict["#form-message"]) messageInput.placeholder = dict["#form-message"];
     
     // Recarregar os ícones do Lucide
-    if (window.lucide) {
         window.lucide.createIcons();
     }
+    
+    // Dispatch custom event to notify page scripts of language changes
+    document.dispatchEvent(new CustomEvent("supe-language-changed", { detail: { language: lang } }));
 }
 
 
