@@ -1457,6 +1457,7 @@ function translatePage(lang) {
     if (messageInput && dict["#form-message"]) messageInput.placeholder = dict["#form-message"];
     
     // Recarregar os ícones do Lucide
+    if (window.lucide) {
         window.lucide.createIcons();
     }
     
